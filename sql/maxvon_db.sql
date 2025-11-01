@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `maxvon_db`
+-- Database: `ttv383`
 --
 
 -- --------------------------------------------------------
@@ -36,35 +36,6 @@ CREATE TABLE `announce` (
   `times_completed` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `online` enum('yes','no') NOT NULL DEFAULT 'yes'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `announce`
---
-
-INSERT INTO `announce` (`id`, `url`, `torrent`, `seeders`, `leechers`, `times_completed`, `online`) VALUES
-(1, 'http://tracker.openbittorrent.com:80/announce', 1, 0, 0, 0, 'no'),
-(2, 'http://tracker.opentrackr.org:1337/announce', 1, 0, 0, 0, 'no'),
-(3, 'https://tracker1.520.jp:443/announce', 1, 0, 0, 0, 'yes'),
-(4, 'https://tracker.tamersunion.org:443/announce', 1, 12, 1, 0, 'yes'),
-(5, 'https://tracker.imgoingto.icu:443/announce', 1, 0, 0, 0, 'no'),
-(6, 'http://nyaa.tracker.wf:7777/announce', 1, 0, 0, 0, 'no'),
-(7, 'https://maxvonsydow.eu.org/announce.php', 2, 0, 0, 0, 'yes'),
-(8, 'https://tracker.lilithraws.org:443/announce', 3, 0, 0, 0, 'yes'),
-(9, 'https://tracker.yemekyedim.com:443/announce', 3, 0, 0, 0, 'yes'),
-(10, 'https://trackers.mlsub.net:443/announce', 3, 0, 0, 0, 'yes'),
-(11, 'http://bt.desol.one:2710/announce', 3, 0, 0, 0, 'no'),
-(12, 'http://bt.okmp3.ru:2710/announce', 3, 0, 0, 0, 'no'),
-(13, 'http://tracker.bt4g.com:2095/announce', 3, 471, 48, 714, 'yes'),
-(14, 'http://tracker.renfei.net:8080/announce', 3, 0, 0, 0, 'no'),
-(15, 'http://retracker.local/announce', 3, 0, 0, 0, 'no'),
-(16, 'http://tracker.grepler.com:6969/announce', 3, 0, 0, 0, 'no'),
-(17, 'http://h4.trakx.nibba.trade:80/announce', 3, 0, 0, 0, 'no'),
-(18, 'https://maxvonsydow.eu.org/announce.php', 4, 0, 0, 0, 'yes'),
-(19, 'https://maxvonsydow.eu.org/announce.php', 5, 0, 0, 0, 'yes'),
-(20, 'https://maxvonsydow.eu.org/announce.php', 6, 0, 0, 0, 'yes'),
-(21, 'https://maxvonsydow.eu.org/announce.php', 7, 0, 0, 0, 'yes'),
-(22, 'https://maxvonsydow.eu.org/announce.php', 8, 0, 0, 0, 'yes'),
-(23, 'https://maxvonsydow.eu.org/announce.php', 9, 0, 0, 0, 'yes');
 
 -- --------------------------------------------------------
 
@@ -163,14 +134,14 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `sort_index`, `image`, `subcat`, `parent_cat`, `sub_sort`) VALUES
-(2, 'Divx/Xvid', 1, 'Movies_Xvid.png', 'yes', 'Movies', '2'),
-(6, 'TV Shows', 2, 'TV_Xvid.png', 'yes', 'TV Shows', '6'),
-(18, 'PC', 3, 'appz.png', 'yes', 'Apps', '18'),
-(22, 'MP3', 7, 'mp3.png', 'yes', 'Music', '22'),
-(53, 'Miscellaneous', 10, 'cat_misc.png', 'no', 'Miscellaneous', ''),
-(55, 'Documentaries', 8, 'documentary.png', 'no', 'Documentary', ''),
-(57, 'Packs', 5, 'MoviesPacks.png', 'no', 'Movies', ''),
-(61, 'TV Packs', 11, 'TVPacks.png', 'no', 'TV Shows', '');
+(1, 'Divx/Xvid', 1, 'Movies_Xvid.png', 'yes', 'Movies', '1'),
+(2, 'TV Shows', 2, 'TV_Xvid.png', 'yes', 'TV Shows', '2'),
+(3, 'PC', 3, 'appz.png', 'yes', 'Apps', '3'),
+(4, 'MP3', 4, 'mp3.png', 'yes', 'Music', '4'),
+(4, 'Miscellaneous', 5, 'cat_misc.png', 'no', 'Miscellaneous', ''),
+(6, 'Documentaries', 6, 'documentary.png', 'no', 'Documentary', ''),
+(7, 'Packs', 7, 'MoviesPacks.png', 'no', 'Movies', ''),
+(8, 'TV Packs', 8, 'TVPacks.png', 'no', 'TV Shows', '');
 
 -- --------------------------------------------------------
 
@@ -545,65 +516,6 @@ CREATE TABLE `guests` (
   `time` decimal(20,0) UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `guests`
---
-
-INSERT INTO `guests` (`ip`, `time`) VALUES
-('37.187.176.128', '1760904603'),
-('176.10.137.87', '1761934334'),
-('185.39.19.49', '1761514271'),
-('205.169.39.57', '1759365858'),
-('185.39.19.34', '1761557796'),
-('45.89.70.31', '1760912982'),
-('185.39.19.43', '1760213664'),
-('91.124.17.210', '1759915721'),
-('185.39.19.97', '1760339357'),
-('34.72.176.129', '1760079629'),
-('185.39.19.48', '1760086736'),
-('66.249.81.34', '1760093348'),
-('205.169.39.14', '1760104159'),
-('205.169.39.123', '1760172379'),
-('198.16.233.71', '1760180364'),
-('35.196.132.85', '1760180534'),
-('212.5.158.35', '1760349454'),
-('212.39.89.107', '1760279236'),
-('92.118.63.236', '1760276148'),
-('212.39.89.11', '1760277042'),
-('34.254.109.160', '1760278614'),
-('212.39.89.83', '1760279307'),
-('212.39.89.59', '1760336209'),
-('2a01:5a8:31b:49a0:2884:8092:9807:1064', '1760298657'),
-('64.71.166.35', '1760289966'),
-('212.102.40.17', '1760294584'),
-('65.111.10.240', '1760484309'),
-('216.26.255.121', '1760484310'),
-('45.89.70.30', '1760562421'),
-('198.16.211.7', '1760656785'),
-('193.142.201.7', '1760773379'),
-('216.26.253.3', '1760817353'),
-('64.238.204.88', '1760861927'),
-('64.238.204.87', '1760882521'),
-('205.169.39.58', '1761177025'),
-('193.187.128.231', '1761215103'),
-('212.103.60.29', '1761241092'),
-('205.169.39.86', '1761265081'),
-('87.126.208.124', '1761862941'),
-('133.242.174.119', '1761348141'),
-('34.123.170.104', '1761509680'),
-('34.122.147.229', '1761509710'),
-('205.169.39.112', '1761637453'),
-('35.86.127.97', '1761694965'),
-('85.221.150.1', '1761935629'),
-('212.39.89.24', '1761953166'),
-('205.169.39.28', '1761858211'),
-('212.39.89.120', '1761925362'),
-('82.192.54.206', '1761939841'),
-('212.39.89.0', '1761935959'),
-('52.123.138.164', '1761936335'),
-('77.110.185.65', '1761944616'),
-('67.230.157.160', '1761938627');
-
 -- --------------------------------------------------------
 
 --
@@ -635,25 +547,6 @@ CREATE TABLE `log` (
   `txt` text DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `log`
---
-
-INSERT INTO `log` (`id`, `added`, `txt`) VALUES
-(14, '2025-10-30 10:55:30', 'Torrent The Color Purple (1985) UHD BDRemux 2160p HDR uploaded by coco'),
-(15, '2025-10-30 10:58:26', 'Torrent 9 (The Color Purple (1985) BDRip AV1-FFE) was edited by coco'),
-(16, '2025-10-30 22:35:40', '<b>Shout<font color=\'orange\'> This message means that in torrents-details.php you have a closing curly brace } without a matching opening {. PHP stops right there and throws a parse error.</font> Deleted by: coco</b>'),
-(17, '2025-10-31 15:46:28', '<b>Shout<font color=\'orange\'> This TT v3.8.3 no Mod IMDB instaled</font> Deleted by: coco</b>'),
-(18, '2025-10-31 15:46:32', '<b>Shout<font color=\'orange\'> Give me access to admin panel pls :)</font> Deleted by: coco</b>'),
-(19, '2025-10-31 15:46:36', '<b>Shout<font color=\'orange\'> Ohhh I undersend You make changes to IMDB parts, be careful with this parts</font> Deleted by: coco</b>'),
-(20, '2025-10-31 18:12:48', 'Shoutbox room 0 cleared by MaxVonSydow'),
-(21, '2025-10-31 18:12:48', 'Shoutbox room 1 cleared by MaxVonSydow'),
-(22, '2025-10-31 18:12:48', 'Shoutbox room 2 cleared by MaxVonSydow'),
-(23, '2025-10-31 18:46:43', '<b>Shout<font color=\'orange\'> [color=#ff0000]This shoutbox room has been cleared[/color]</font> Deleted by: MaxVonSydow</b>'),
-(24, '2025-10-31 20:36:33', 'MaxVonSydow has edited user: 5 details'),
-(25, '2025-10-31 20:44:33', 'MaxVonSydow has edited user: 4 details'),
-(26, '2025-10-31 20:45:38', 'MaxVonSydow has edited user: 1 details');
-
 -- --------------------------------------------------------
 
 --
@@ -671,18 +564,6 @@ CREATE TABLE `messages` (
   `subject` text NOT NULL DEFAULT '',
   `location` enum('in','out','both','draft','template') NOT NULL DEFAULT 'in'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `messages`
---
-
-INSERT INTO `messages` (`id`, `sender`, `receiver`, `added`, `msg`, `unread`, `poster`, `subject`, `location`) VALUES
-(2, 0, 2, '2025-10-11 11:59:11', 'Thank you for registering at our tracker! Please remember to keep your ratio at 1.00 or greater :)', 'no', 0, '', 'in'),
-(4, 3, 1, '2025-10-12 19:18:18', 'Now everything working like a charm', 'no', 0, 'Site', 'both'),
-(5, 0, 4, '2025-10-31 17:38:40', 'Thank you for registering at our tracker! Please remember to keep your ratio at 1.00 or greater :)', 'no', 0, '', 'in'),
-(6, 0, 5, '2025-10-31 19:22:12', 'Thank you for registering at our tracker! Please remember to keep your ratio at 1.00 or greater :)', 'no', 0, '', 'in'),
-(7, 0, 5, '2025-10-31 20:36:33', 'You have been promoted to \'Power User\' by MaxVonSydow.', 'no', 0, 'Promotion/Demotion Notification', 'in'),
-(8, 0, 4, '2025-10-31 20:44:33', 'You have been promoted to \'Power User\' by MaxVonSydow.', 'no', 0, 'Promotion/Demotion Notification', 'in');
 
 -- --------------------------------------------------------
 
@@ -721,17 +602,6 @@ CREATE TABLE `peers` (
   `userid` varchar(32) NOT NULL DEFAULT '',
   `passkey` varchar(32) NOT NULL DEFAULT ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `peers`
---
-
-INSERT INTO `peers` (`id`, `torrent`, `peer_id`, `ip`, `port`, `uploaded`, `downloaded`, `to_go`, `seeder`, `started`, `last_action`, `connectable`, `client`, `userid`, `passkey`) VALUES
-(37, 8, '-lt0D80-an´8xß2 Èm', '45.87.251.163', 64236, 2154063108, 0, 0, 'yes', '2025-10-26 01:10:05', '2025-10-31 23:25:33', 'no', 'rtorrent/0.9.8/0.13.8', '1', '7ac092796ee9af5533fe05fb661283a8'),
-(38, 7, '-lt0D80-pø­3MÝ(rž×', '45.87.251.163', 64236, 0, 0, 0, 'yes', '2025-10-26 01:10:13', '2025-10-31 23:26:42', 'no', 'rtorrent/0.9.8/0.13.8', '1', '7ac092796ee9af5533fe05fb661283a8'),
-(39, 6, '-lt0D80-,@þB—§ô1™', '45.87.251.163', 64236, 0, 0, 0, 'yes', '2025-10-26 01:10:13', '2025-10-31 23:26:33', 'no', 'rtorrent/0.9.8/0.13.8', '1', '7ac092796ee9af5533fe05fb661283a8'),
-(40, 5, '-lt0D80-\Z!yK÷wÃ€¶B', '45.87.251.163', 64236, 0, 0, 0, 'yes', '2025-10-26 01:10:19', '2025-10-31 23:26:42', 'no', 'rtorrent/0.9.8/0.13.8', '1', '7ac092796ee9af5533fe05fb661283a8'),
-(53, 8, '-UT2210-b%‰’×v£Ý6', '', 62263, 0, 0, 0, 'yes', '2025-10-31 15:19:32', '2025-10-31 23:20:03', 'no', 'uTorrent/2210(25110)', '1', '7ac092796ee9af5533fe05fb661283a8');
 
 -- --------------------------------------------------------
 
@@ -792,15 +662,6 @@ CREATE TABLE `ratings` (
   `added` datetime DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `ratings`
---
-
-INSERT INTO `ratings` (`torrent`, `user`, `rating`, `added`) VALUES
-(1, 3, 5, '2025-10-12 19:43:02'),
-(8, 1, 5, '2025-10-30 12:04:16'),
-(9, 1, 5, '2025-10-30 13:41:50'),
-(9, 3, 5, '2025-10-30 23:14:36');
 
 -- --------------------------------------------------------
 
@@ -849,20 +710,6 @@ CREATE TABLE `shoutbox` (
   `room` int(10) UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `shoutbox`
---
-
-INSERT INTO `shoutbox` (`msgid`, `user`, `message`, `date`, `userid`, `room`) VALUES
-(28, 'System', '[color=#ff0000]This shoutbox room has been cleared[/color]', '2025-10-31 18:12:48', 1, 2),
-(27, 'System', '[color=#ff0000]This shoutbox room has been cleared[/color]', '2025-10-31 18:12:48', 1, 1),
-(29, 'MaxVonSydow', 'Hope it working now ....', '2025-10-31 18:46:37', 1, 0),
-(30, 'bitva', 'congratulations great :ok: ', '2025-10-31 19:28:36', 5, 0),
-(31, 'MaxVonSydow', 'thanks', '2025-10-31 19:32:47', 1, 0),
-(32, 'MaxVonSydow', 'we will share it publicly very soon', '2025-10-31 19:33:21', 1, 0),
-(33, 'Bean', 'very nice  :ok: ', '2025-10-31 19:36:47', 4, 0),
-(34, 'coco', 'We need fix all undefined index and undefined variables ', '2025-10-31 23:27:49', 3, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -892,8 +739,7 @@ CREATE TABLE `stylesheets` (
 --
 
 INSERT INTO `stylesheets` (`id`, `uri`, `name`) VALUES
-(1, 'default', 'default'),
-(113, 'Dark Gray', 'GRAY');
+(1, 'default', 'default');
 
 -- --------------------------------------------------------
 
@@ -905,13 +751,6 @@ CREATE TABLE `tasks` (
   `task` varchar(20) NOT NULL DEFAULT '',
   `last_time` int(10) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tasks`
---
-
-INSERT INTO `tasks` (`task`, `last_time`) VALUES
-('cleanup', 1761953165);
 
 -- --------------------------------------------------------
 
@@ -994,21 +833,6 @@ CREATE TABLE `torrents` (
   `freeleech` enum('0','1') NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `torrents`
---
-
-INSERT INTO `torrents` (`id`, `info_hash`, `name`, `filename`, `save_as`, `descr`, `image1`, `image2`, `category`, `size`, `added`, `type`, `numfiles`, `comments`, `views`, `hits`, `times_completed`, `leechers`, `seeders`, `last_action`, `visible`, `banned`, `owner`, `anon`, `numratings`, `ratingsum`, `nfo`, `announce`, `external`, `torrentlang`, `freeleech`) VALUES
-(1, '215205f03ac5dee878b5f5afd1e8cccc69e13f64', 'Blue.Lights.S03.1080p.IP.WEB-DL.H264-SAiNT', 'Blue.Lights.S03.1080p.iP.WEB-DL.H264-SAiNT.torrent', 'Blue.Lights.S03.1080p.iP.WEB-DL.H264-SAiNT.torrent', 'Follows rookie police officers working in Belfast, a city in which being a frontline response cop comes with unique pressures and dangers.', '10.jpg', '11.jpg', 6, 13905921245, '2025-09-29 19:49:45', 'single', 6, 1, 35, 7, 0, 1, 12, '2025-10-12 20:15:34', 'yes', 'no', 1, 'no', 1, 5, 'no', 'udp://tracker.opentrackr.org:1337/announce', 'yes', 1, '0'),
-(2, '5355a4b12dc182eb0193c2a47b777f1c31386115', 'Showtrial.S01.1080p.AMZN.WEB-DL.DDP2.0.H.264-NTb', 'Showtrial.S01.1080p.AMZN.WEB-DL.DDP2.0.H.264-NTb.torrent', 'Showtrial.S01.1080p.AMZN.WEB-DL.DDP2.0.H.264-NTb.torrent', '================================================================================\r\nAbout UL .........: https://pirates-forum.org/private.php?action=send&uid=157351\r\n================================================================================\r\n\r\nTajkun je priÄa o Vladanu SimonoviÄ‡u, tajkunu kog maestralno tumaÄi Dragan BjelogrliÄ‡. Vladan je u javnosti omraÅ¾en zbog bogatstva steÄenog na sumnjiv naÄin, tokom devedesetih godina proÅ¡log veka. \r\n\r\nGodinama je iz senke upravljao svojom moÄ‡nom kompanijom, ali se sve menja kada biva primoran da izaÄ‘e na medijsku svetlost. On postaje progonjen Äovek, prisiljen na drastiÄne mere radi oÄuvanja sebe i svoje porodice. \r\n\r\nVladan ima neprijatelje, i javne i tajne. Vladan se sukobljava i sa onima koji bi trebalo da su mu najbliÅ¾i. Vladan krije, i otkriva tajne. \r\n\r\n\r\n=============================================================\r\nThis torrent keeps alive as long as you seed\r\n=============================================================', '20.png', '21.jpg', 6, 21249340801, '2025-10-07 07:49:47', 'single', 5, 0, 3, 11, 0, 0, 0, '2025-10-07 07:49:47', 'no', 'no', 1, 'no', 0, 0, 'no', 'https://maxvonsydow.eu.org/announce.php', 'no', 1, '0'),
-(3, '090156e6172ab12c7bd338441d1873d4abf63300', 'Play Dirty (2025) WEB-DLRip-AVC', '[rutor.is]Play.Dirty.2025.DUB.MVO.WEB-DLRip-AVC.seleZen.m.torrent', '[rutor.is]Play.Dirty.2025.DUB.MVO.WEB-DLRip-AVC.seleZen.m.torrent', 'Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ Ð¾ Ñ„Ð¸Ð»ÑŒÐ¼Ðµ\r\nÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ: Ð“Ñ€ÑÐ·Ð½Ð°Ñ Ð¸Ð³Ñ€Ð°\r\nÐžÑ€Ð¸Ð³Ð¸Ð½Ð°Ð»ÑŒÐ½Ð¾Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ: Play Dirty\r\nÐ“Ð¾Ð´ Ð²Ñ‹Ð¿ÑƒÑÐºÐ°: 2025\r\nÐ–Ð°Ð½Ñ€: Ð‘Ð¾ÐµÐ²Ð¸Ðº, ÐºÐ¾Ð¼ÐµÐ´Ð¸Ñ, ÐºÑ€Ð¸Ð¼Ð¸Ð½Ð°Ð»\r\nÐ ÐµÐ¶Ð¸ÑÑÐµÑ€: Ð¨ÐµÐ¹Ð½ Ð‘Ð»ÑÐº\r\nÐ’ Ñ€Ð¾Ð»ÑÑ…: ÐœÐ°Ñ€Ðº Ð£Ð¾Ð»Ð±ÐµÑ€Ð³, Ð›Ð°ÐºÐ¸Ñ‚ Ð¡Ñ‚ÑÐ½Ñ„Ð¸Ð»Ð´, Ð Ð¾Ð·Ð° Ð¡Ð°Ð»Ð°Ð·Ð°Ñ€, ÐšÐ¸Ð³ÑÐ½-ÐœÐ°Ð¹ÐºÐ» ÐšÐ¸, Ð§ÑƒÐºÑƒÐ´Ð¸ Ð˜Ð²ÑƒÐ´Ð¶Ð¸, ÐÑÑ‚ Ð’ÑƒÐ»Ñ„Ñ„, Ð“Ñ€ÐµÑ‚Ñ…ÐµÐ½ ÐœÐ¾Ð», Ð¢Ð¾Ð¼Ð°Ñ Ð”Ð¶ÐµÐ¹Ð½, Ð¢Ð¾Ð½Ð¸ Ð¨ÑÐ»Ð¾ÑƒÐ±, Ð¥ÐµÐ¼ÐºÐ¸ ÐœÐ°Ð´ÐµÑ€Ð°, ÐÐ»ÐµÑ…Ð°Ð½Ð´Ñ€Ð¾ Ð­Ð´Ð´Ð°, ÐšÐ»ÑÑ€ Ð›Ð¾Ð²ÐµÑ€Ð¸Ð½Ð³, Ð§Ð°Ð¹ Ð¥Ð°Ð½ÑÐµÐ½, Ð¡ÐµÐ±Ð°ÑÑ‚ÑŒÑÐ½ ÐšÐ°Ñ€Ñ€', '', '', 2, 1934932566, '2025-10-12 20:17:33', 'single', 1, 0, 27, 8, 714, 48, 471, '2025-10-12 20:43:53', 'yes', 'no', 3, 'no', 0, 0, 'no', 'udp://opentor.net:6969', 'yes', 1, '0'),
-(4, 'f2c528226eab17c8d1d1bd5d1ffb5903059f19ca', 'Airplane.1980.720p.BDRip.AV1-FFE', 'Airplane.1980.720p.BDRip.AV1-FFE.torrent', 'Airplane.1980.720p.BDRip.AV1-FFE.torrent', 'Test description\r\nTest description\r\nTest description', '', '', 2, 1390551626, '2025-10-12 20:45:13', 'single', 1, 0, 41, 13, 0, 0, 0, '2025-10-13 13:26:10', 'no', 'no', 3, 'no', 0, 0, 'no', 'https://maxvonsydow.eu.org/announce.php', 'no', 1, '0'),
-(5, '3e95a6acf9aa63b0a4b507e1baf519b7bd563c34', 'Agatha.Christie.Towards.Zero.E01.1080p.WEBRip.x264.[ExYuSubs]', 'Agatha.Christie.Towards.Zero.E01.1080p.WEBRip.x264.[ExYuSubs].torrent', 'Agatha.Christie.Towards.Zero.E01.1080p.WEBRip.x264.[ExYuSubs].torrent', 'Inspector Leach probes the brutal murder of an elderly widow in her Gull\'s Point home. A failed suicide, a false theft charge, an out-of-service hotel lift and a tennis star\'s love life intersect, culminating in a bizarre mass murder plot.', '50.jpg', '51.jpg', 6, 1077127944, '2025-10-17 07:23:27', 'single', 2, 0, 4, 1, 0, 0, 1, '2025-10-31 23:26:42', 'yes', 'no', 1, 'no', 0, 0, 'no', 'https://maxvonsydow.eu.org/announce.php', 'no', 1, '0'),
-(6, 'b7e22def18dff1c799585ec0f9fd2a8c395593da', 'Agatha.Christie.Towards.Zero.E02.1080p.WEBRip.x264.[ExYuSubs]', 'Agatha.Christie.Towards.Zero.E02.1080p.WEBRip.x264.[ExYuSubs].torrent', 'Agatha.Christie.Towards.Zero.E02.1080p.WEBRip.x264.[ExYuSubs].torrent', 'Inspector Leach probes the brutal murder of an elderly widow in her Gull\'s Point home. A failed suicide, a false theft charge, an out-of-service hotel lift and a tennis star\'s love life intersect, culminating in a bizarre mass murder plot.', '60.jpg', '61.jpg', 6, 1077151735, '2025-10-17 07:24:13', 'single', 2, 0, 2, 1, 0, 0, 1, '2025-10-31 23:26:33', 'yes', 'no', 1, 'no', 0, 0, 'no', 'https://maxvonsydow.eu.org/announce.php', 'no', 1, '0'),
-(7, '8652ae4fcfd4bf5d53f9c9ede5a83bb6b0b9acd5', 'Agatha.Christie.Towards.Zero.E03.1080p.WEBRip.x264.[ExYuSubs]', 'Agatha.Christie.Towards.Zero.E03.1080p.WEBRip.x264.[ExYuSubs].torrent', 'Agatha.Christie.Towards.Zero.E03.1080p.WEBRip.x264.[ExYuSubs].torrent', 'Inspector Leach probes the brutal murder of an elderly widow in her Gull\'s Point home. A failed suicide, a false theft charge, an out-of-service hotel lift and a tennis star\'s love life intersect, culminating in a bizarre mass murder plot.', '70.jpg', '71.jpg', 6, 1076992807, '2025-10-17 07:24:29', 'single', 2, 0, 3, 1, 0, 0, 1, '2025-10-31 23:26:42', 'yes', 'no', 1, 'no', 0, 0, 'no', 'https://maxvonsydow.eu.org/announce.php', 'no', 1, '0'),
-(8, '6111a03ad2da583a1db6caf4133a29e6ce23d0a3', 'Agatha.Christie.Towards.Zero.E04.1080p.WEBRip.x264.[ExYuSubs]', 'Agatha.Christie.Towards.Zero.E04.1080p.WEBRip.x264.[ExYuSubs].torrent', 'Agatha.Christie.Towards.Zero.E04.1080p.WEBRip.x264.[ExYuSubs].torrent', 'Inspector Leach probes the brutal murder of an elderly widow in her Gull\'s Point home. A failed suicide, a false theft charge, an out-of-service hotel lift and a tennis star\'s love life intersect, culminating in a bizarre mass murder plot.', '80.jpg', '81.jpg', 6, 1077031554, '2025-10-17 07:24:51', 'single', 2, 1, 36, 3, 2, 0, 2, '2025-10-31 23:25:33', 'yes', 'no', 1, 'no', 1, 5, 'no', 'https://maxvonsydow.eu.org/announce.php', 'no', 1, '0'),
-(9, '7524ba35c413726f3da1da464ead32c307aeb7d8', 'The Color Purple (1985) BDRip AV1-FFE', 'The.Color.Purple.1985.1080p.BDRip.AV1-FFE.torrent', 'The.Color.Purple.1985.1080p.BDRip.AV1-FFE.torrent', 'Ð ÐµÐ¶Ð¸ÑÑŒÐ¾Ñ€: Ð¡Ñ‚Ð¸Ð²ÑŠÐ½ Ð¡Ð¿Ð¸Ð»Ð±ÑŠÑ€Ð³\r\nÐ’ Ñ€Ð¾Ð»Ð¸Ñ‚Ðµ: Ð›Ð¾Ñ€ÑŠÐ½Ñ Ð¤Ð¸ÑˆÐ±ÑŠÑ€Ð½, Ð”Ð°Ð½Ð¸ Ð“Ð»Ð¾ÑƒÐ²ÑŠÑ€, Ð£Ð¿Ð¸ Ð“Ð¾Ð»Ð´Ð±ÑŠÑ€Ð³, ÐœÐ°Ñ€Ð³Ð°Ñ€ÐµÑ‚ Ð•Ð¹Ð²ÑŠÑ€Ð¸, ÐžÐ¿Ñ€Ð° Ð£Ð¸Ð½Ñ„Ñ€Ð¸, Ð£Ð¸Ð»Ð°Ñ€Ð´ ÐŸÑŠÑ…, ÐÐºÐ¾ÑÑƒÐ° Ð‘ÑƒÑÐ¸Ð°, ÐÐ´Ð¾Ð»Ñ„ Ð¡Ð¸Ð¹Ð·ÑŠÑ€, Ð Ðµ Ð”Ð¾Ð½ Ð§Ð¾Ð½, Ð”Ð°Ð½Ð° ÐÐ¹Ð²Ð¸\r\n\r\nÐ–Ð°Ð½Ñ€: Ð”Ñ€Ð°Ð¼Ð°\r\nÐ’Ñ€ÐµÐ¼ÐµÑ‚Ñ€Ð°ÐµÐ½Ðµ: 152 Ð¼Ð¸Ð½ÑƒÑ‚Ð¸\r\n\r\nÐ ÐµÐ·ÑŽÐ¼Ðµ: Ð˜ÑÑ‚Ð¾Ñ€Ð¸Ñ Ð·Ð° Ð¶Ð¸Ð²Ð¾Ñ‚Ð° Ð½Ð° ÐµÐ´Ð½Ð¾ Ð¼Ð¾Ð¼Ð¸Ñ‡Ðµ, Ð·Ð° Ñ‚Ð¾Ð²Ð°, ÐºÐ¾ÐµÑ‚Ð¾ Ð‘Ð¾Ð³ ÑÐµ Ð¾Ð¿Ð¸Ñ‚Ð²Ð° Ð´Ð° ÐºÐ°Ð¶Ðµ Ð½Ð° Ñ…Ð¾Ñ€Ð°Ñ‚Ð° Ð¸ Ð·Ð° Ñ€Ð°Ð·Ð»Ð¸Ñ‡Ð½Ð¸Ñ‚Ðµ Ð½Ð°Ñ‡Ð¸Ð½Ð¸, Ð¿Ð¾ ÐºÐ¾Ð¸Ñ‚Ð¾ Ñ‚Ðµ Ñ€Ð°Ð·Ð±Ð¸Ñ€Ð°Ñ‚ Ð¿Ð¾ÑÐ»Ð°Ð½Ð¸ÑÑ‚Ð° Ð¼Ñƒ.\r\nÐ¤Ð¸Ð»Ð¼ÑŠÑ‚ Ð¿Ñ€ÐµÐ´ÑÑ‚Ð°Ð²Ñ Ð¡ÐµÐ»Ð¸, Ð¼Ð»Ð°Ð´Ð¾ Ñ‡ÐµÑ€Ð½Ð¾ÐºÐ¾Ð¶Ð¾ Ð¼Ð¾Ð¼Ð¸Ñ‡Ðµ, Ð¾Ñ‚ Ð½Ð°Ñ‡Ð°Ð»Ð¾Ñ‚Ð¾ Ð½Ð° 1900 Ð³Ð¾Ð´Ð¸Ð½Ð°. Ð¢Ñ Ðµ 14-Ð³Ð¾Ð´Ð¸ÑˆÐ½Ð° Ð¸ Ð±Ñ€ÐµÐ¼ÐµÐ½Ð½Ð° Ð¾Ñ‚ ÑÐ²Ð¾Ñ Ð±Ð°Ñ‰Ð°. ÐžÑ‚Ñ‚ÑƒÐº Ð·Ð°Ð¿Ð¾Ñ‡Ð²Ð° Ð¸ÑÑ‚Ð¾Ñ€Ð¸ÑÑ‚Ð° Ð½Ð° Ð½ÐµÐ¹Ð½Ð¸Ñ Ð¸Ð·ÐºÑƒÐ¿Ð¸Ñ‚ÐµÐ»ÐµÐ½ Ð¸ Ñ‚ÐµÐ¶ÑŠÐº Ð¶Ð¸Ð²Ð¾Ñ‚ Ð¿Ñ€ÐµÐ· ÑÐ»ÐµÐ´Ð²Ð°Ñ‰Ð¸Ñ‚Ðµ 30 Ð³Ð¾Ð´Ð¸Ð½Ð¸.', '90.jpg', '', 2, 4062530038, '2025-10-30 10:55:30', 'single', 1, 0, 10, 1, 0, 0, 0, '2025-10-30 22:56:50', 'no', 'no', 3, 'no', 2, 10, 'no', 'https://maxvonsydow.eu.org/announce.php', 'no', 1, '0');
-
 -- --------------------------------------------------------
 
 --
@@ -1060,17 +884,6 @@ CREATE TABLE `users` (
   `tzoffset` int(4) DEFAULT 0,
   `hideshoutbox` enum('yes','no') NOT NULL DEFAULT 'no'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci PACK_KEYS=0;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password`, `secret`, `email`, `status`, `added`, `last_login`, `last_access`, `editsecret`, `privacy`, `stylesheet`, `language`, `info`, `acceptpms`, `ip`, `class`, `avatar`, `uploaded`, `downloaded`, `title`, `donated`, `country`, `notifs`, `enabled`, `modcomment`, `gender`, `client`, `age`, `warned`, `signature`, `last_browse`, `forumbanned`, `invited_by`, `invitees`, `invites`, `invitedate`, `commentpm`, `passkey`, `page`, `team`, `tzoffset`, `hideshoutbox`) VALUES
-(1, 'MaxVonSydow', 'b82fb528883dce23cf6498119d06511b3c62fe1a', '9p5XqNQjFfS6av41lo7W', 'exyusubs@protonmail.com', 'confirmed', '2025-09-29 19:04:10', '2025-10-31 18:12:30', '2025-10-31 23:28:24', '', 'normal', 1, '1', NULL, 'yes', '176.10.137.87', 7, '', 4301546756, 1077031554, 'Owner', 0, 20, '', 'yes', '  ', 'Male', 'Shazam', 33, 'no', 'Just a an human bean', 1761953092, 'no', 0, '', 0, NULL, 'no', '7ac092796ee9af5533fe05fb661283a8', '/home/maxvon/public_html/shoutbox.php', 0, 0, 'no'),
-(2, 'spiritblue', '5a84995faca4d9a9ea858517898d6c03d1e3283f', 'jRm0HnyfTBprpBHnFFvD', 'ytiloup@hotmail.com', 'confirmed', '2025-10-11 11:59:11', '2025-10-17 00:09:30', '2025-10-17 00:11:56', '', 'normal', 1, '1', NULL, 'yes', '198.16.211.7', 6, '', 2147483648, 0, '', 0, 5, '', 'yes', NULL, 'Male', 'qBittorrent', 56, 'no', '', 1760656261, 'no', 0, '', 0, NULL, 'yes', '', '/home/maxvon/public_html/account-logout.php', 0, 0, 'no'),
-(3, 'coco', '089d11cb5bf9ffc8c63afe6785defc90b629a234', 'Wv8UyTkwxz4PWN3yVNiT', 'mondeo1706@gmail.com', 'confirmed', '2025-10-12 11:47:00', '2025-10-31 23:26:26', '2025-10-31 23:28:30', '', 'strong', 1, '1', NULL, 'yes', '212.39.89.24', 6, '', 2147483648, 0, '', 0, 68, '', 'yes', NULL, 'Male', '', 49, 'no', '', 1761953186, 'no', 0, '', 0, NULL, 'no', '5058f24a0d91c9c7e3a8fb44ae4e72e9', '/home/maxvon/public_html/shoutbox.php', 0, 0, 'no'),
-(4, 'Bean', '932b1c5dbfdb13e986b869d07ab56a8806adb8fa', 'g073FTEfECkw5RmFD4xr', 'sihq.sytes@gmail.com', 'confirmed', '2025-10-31 17:38:40', '2025-10-31 19:44:04', '2025-10-31 21:42:19', '', 'normal', 1, '1', NULL, 'yes', '82.192.54.206', 2, '', 5368709120, 0, '', 0, 64, '', 'yes', '  ', 'Male', 'uTorrent', 56, 'no', '', 1761946932, 'no', 0, '', 0, NULL, 'no', '', '/home/maxvon/public_html/account-details.php', 0, 0, 'no'),
-(5, 'bitva', 'db6f2c2081184cbd114e1e4dc5fab2dd9c99a462', 'KAMu63GV09LBHpsARqu7', 'krizsi1966@gmail.com', 'confirmed', '2025-10-31 19:22:12', '2025-10-31 20:47:50', '2025-10-31 21:03:36', '', 'normal', 1, '1', NULL, 'yes', '77.110.185.65', 2, '', 5368709120, 1077031554, '', 0, 74, '', 'yes', '$user[\"modcomment\"]', 'Male', 'qtorrent', 58, 'no', '', 1761944569, 'no', 0, '', 0, NULL, 'no', '2132afd389db2692df8004745a9cbbad', '/home/maxvon/public_html/account-logout.php', 0, 60, 'no');
 
 -- --------------------------------------------------------
 
@@ -1355,7 +1168,7 @@ ALTER TABLE `warnings`
 -- AUTO_INCREMENT for table `announce`
 --
 ALTER TABLE `announce`
-  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `bans`
@@ -1367,31 +1180,31 @@ ALTER TABLE `bans`
 -- AUTO_INCREMENT for table `blocks`
 --
 ALTER TABLE `blocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `completed`
 --
 ALTER TABLE `completed`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `countries`
 --
 ALTER TABLE `countries`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `email_bans`
@@ -1409,7 +1222,7 @@ ALTER TABLE `faq`
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `forumcats`
@@ -1445,25 +1258,25 @@ ALTER TABLE `forum_topics`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `group_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `group_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `languages`
 --
 ALTER TABLE `languages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -1475,7 +1288,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `peers`
 --
 ALTER TABLE `peers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `pollanswers`
@@ -1505,7 +1318,7 @@ ALTER TABLE `rules`
 -- AUTO_INCREMENT for table `shoutbox`
 --
 ALTER TABLE `shoutbox`
-  MODIFY `msgid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `msgid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `sqlerr`
@@ -1517,7 +1330,7 @@ ALTER TABLE `sqlerr`
 -- AUTO_INCREMENT for table `stylesheets`
 --
 ALTER TABLE `stylesheets`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `teams`
@@ -1529,19 +1342,19 @@ ALTER TABLE `teams`
 -- AUTO_INCREMENT for table `torrentlang`
 --
 ALTER TABLE `torrentlang`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `torrents`
 --
 ALTER TABLE `torrents`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `warnings`
