@@ -1,4 +1,15 @@
 <?php
+
+#================================#
+#       TorrentTrader 3.8.3      #
+#  http://torrenttrader.uk       #
+#--------------------------------#
+#       Created by M-Jay         #
+#       Modified by MicroMonkey, #
+#       Coco, Botanicar          #
+#================================#
+
+
 if (!$site_config["MEMBERSONLY"] || $CURUSER) {
 begin_block(T_("BROWSE_TORRENTS"));
 	$catsquery = SQL_Query_exec("SELECT distinct parent_cat FROM categories ORDER BY parent_cat");

@@ -1,6 +1,15 @@
 <?php
 
-if ($site_config['NEWSON']){ //check news is turned on first   
+#================================#
+#       TorrentTrader 3.8.3      #
+#  http://torrenttrader.uk       #
+#--------------------------------#
+#       Created by M-Jay         #
+#       Modified by MicroMonkey, #
+#       Coco, Botanicar          #
+#================================#
+
+if ($site_config['NEWSON']){ //check news is turned on first
 	begin_block(T_("LATEST_NEWS"));
 
 	$res = SQL_Query_exec("SELECT * FROM news ORDER BY added DESC LIMIT 10");

@@ -1,5 +1,16 @@
 <?php
 
+#================================#
+#       TorrentTrader 3.8.3      #
+#  http://torrenttrader.uk       #
+#--------------------------------#
+#       Created by M-Jay         #
+#       Modified by MicroMonkey, #
+#       Coco, Botanicar          #
+#================================#
+
+
+
 function T_($s) {
     GLOBAL $LANG;
 

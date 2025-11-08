@@ -1,4 +1,15 @@
 <?php
+
+#================================#
+#       TorrentTrader 3.8.3      #
+#  http://torrenttrader.uk       #
+#--------------------------------#
+#       Created by M-Jay         #
+#       Modified by MicroMonkey, #
+#       Coco, Botanicar          #
+#================================#
+
+
 $tzs = [];
 
 $tzs["-720"] = array("(GMT - 12:00 hours) Enitwetok, Kwajalien", "Pacific/Kwajalein");

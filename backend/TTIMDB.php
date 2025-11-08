@@ -1,5 +1,14 @@
 <?php
 
+#================================#
+#       TorrentTrader 3.8.3      #
+#  http://torrenttrader.uk       #
+#--------------------------------#
+#       Created by M-Jay         #
+#       Modified by MicroMonkey, #
+#       Coco, Botanicar          #
+#================================#
+
 class TTIMDB
 {
    private $_nodes = ['https://www.omdbapi.com/?apikey=2e3b07e4&i=%s'];

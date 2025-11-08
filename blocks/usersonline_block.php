@@ -1,12 +1,13 @@
 <?php
+
 #================================#
-#       TorrentTrader 3.00       #
-#  http://www.torrenttrader.uk   #
+#       TorrentTrader 3.8.3      #
+#  http://torrenttrader.uk       #
 #--------------------------------#
 #       Created by M-Jay         #
-#       Modified by Botanicar    #
+#       Modified by MicroMonkey, #
+#       Coco, Botanicar          #
 #================================#
-
 
 begin_frame( T_("ONLINE_USERS_TODAY") );
 

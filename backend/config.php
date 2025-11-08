@@ -1,5 +1,16 @@
 <?php
 
+#================================#
+#       TorrentTrader 3.8.3      #
+#  http://torrenttrader.uk       #
+#--------------------------------#
+#       Created by M-Jay         #
+#       Modified by MicroMonkey, #
+#       Coco, Botanicar          #
+#================================#
+
+
+
 //Access control
 if (php_sapi_name() !== 'cli' && !isset($_SERVER['HTTP_HOST'])) {
     http_response_code(403);
