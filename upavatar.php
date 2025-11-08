@@ -1,15 +1,13 @@
-<?php
-
-#================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
-#--------------------------------#
-#       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
-#================================#
-
-
+﻿<?php
+////////////////////////////////////////
+//  TorrentTrader v2.x
+//  http://www.torrenttrader.org
+//
+//  Upload Avatar
+//  Author: Skayver
+//
+//  Date: 13/11/2007
+///////////////////////////////////////
 
 require_once ("backend/functions.php");
 dbconn();

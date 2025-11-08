@@ -13,7 +13,7 @@ require_once("backend/functions.php");
 require_once("backend/bbcode.php");
 dbconn();
 loggedinonly();
-
+$do = $_GET['do'] ?? '';
 if (!$CURUSER || $CURUSER["control_panel"]!="yes"){
      show_error_msg(T_("ERROR"), T_("SORRY_NO_RIGHTS_TO_ACCESS"), 1);
 }
@@ -1082,12 +1082,17 @@ if ($action=="messagespy"){
 		else
 			$receiver = "<i>Deleted</i>";
 
-		$res3 = SQL_Query_exec("SELECT username FROM users WHERE id=" . $arr["sender"]);
-		$arr3 = mysqli_fetch_assoc($res3);
+         $res3 = SQL_Query_exec("SELECT username FROM users WHERE id=" . $arr["sender"]);
+          $arr3 = mysqli_fetch_assoc($res3);
 
-		$sender = "<a href='account-details.php?id=" . $arr["sender"] . "'><b>" . $arr3["username"] . "</b></a>";
-		if( $arr["sender"] == 0 )
-			$sender = "<font class='error'><b>System</b></font>";
+         if ($arr["sender"] == 0) {
+          $sender = "<font class='error'><b>System</b></font>";
+          } elseif ($arr3) {
+          $sender = "<a href='account-details.php?id=" . $arr["sender"] . "'><b>" . $arr3["username"] . "</b></a>";
+          } else {
+          $sender = "<i>Deleted</i>";
+        }
+
 		$msg = format_comment($arr["msg"]);
 
 		$added = utc_to_tz($arr["added"]);
@@ -4385,7 +4390,7 @@ if ($action == "usersearch") {
 		}
 
 		//donor
-		$donor = $_GET['do'];
+		$donor = $do;
 		if ($donor) {
 			$where_is .= (isset($where_is))?" AND ":"";
 			if ($donor == 1) {
@@ -4542,8 +4547,9 @@ if ($action == "usersearch") {
 // Forum management 
 if ($action == "forum") {
 
-    $error_ac == "";
-    if ($_POST["do"] == "add_this_forum") {
+	$error_ac = '';
+
+    if ($do == "add_this_forum") {
         
         $new_forum_name = $_POST["new_forum_name"];
         $new_desc = $_POST["new_desc"];
@@ -4569,7 +4575,7 @@ if ($action == "forum") {
             autolink("admincp.php?action=forum", $error_ac);
     }
 
-    if ($_POST["do"] == "add_this_forumcat") {
+    if ($do == "add_this_forumcat") {
         
         $new_forumcat_name = $_POST["new_forumcat_name"];
         $new_forumcat_sort = $_POST["new_forumcat_sort"];
@@ -4588,7 +4594,7 @@ if ($action == "forum") {
             autolink("admincp.php?action=forum", $error_ac);
     }
 
-    if ($_POST["do"] == "save_edit") {
+    if ($do == "save_edit") {
         
         $id = (int) $_POST["id"];
         $changed_sort = (int) $_POST["changed_sort"];
@@ -4603,7 +4609,7 @@ if ($action == "forum") {
         autolink("admincp.php?action=forum", "<center><b>".T_("CP_UPDATE_COMPLETED")."</b></center>");
     }
 
-    if ($_POST["do"] == "save_editcat") {
+    if ($do == "save_editcat") {
         
         $id = (int) $_POST["id"];
         $changed_sortcat = (int) $_POST["changed_sortcat"];
@@ -4612,7 +4618,7 @@ if ($action == "forum") {
         autolink("admincp.php?action=forum", "<center><b>".T_("CP_UPDATE_COMPLETED")."</b></center>");
     }
 
-    if ($_POST["do"] == "delete_forum" && is_valid_id($_POST["id"])) 
+    if ($do == "delete_forum" && is_valid_id($_POST["id"])) 
     {
         SQL_Query_exec("DELETE FROM forum_forums WHERE id = $_POST[id]");
         SQL_Query_exec("DELETE FROM forum_topics WHERE forumid = $_POST[id]");
@@ -4621,7 +4627,7 @@ if ($action == "forum") {
         autolink("admincp.php?action=forum", T_("CP_FORUM_DELETED"));
     }
     
-    if ($_POST["do"] == "delete_forumcat" && is_valid_id($_POST["id"])) 
+    if ($do == "delete_forumcat" && is_valid_id($_POST["id"])) 
     {
         SQL_Query_exec("DELETE FROM forumcats WHERE id = $_POST[id]");
         
@@ -4650,7 +4656,7 @@ if ($action == "forum") {
     while ($groupsrow = mysqli_fetch_row($groupsres))
         $groups[$groupsrow[0]] = $groupsrow[1];
 
-    if ($_GET["do"] == "edit_forum") {
+    if (isset($do) && $do == "edit") {
         
         $id = (int) $_GET["id"];
         
@@ -4710,7 +4716,7 @@ if ($action == "forum") {
         stdfoot();
     }
 
-if ($_GET["do"] == "del_forum") {
+if (isset($do) && $do == "del_forum") {
     
     $id = (int) $_GET["id"];
     
@@ -4733,7 +4739,7 @@ if ($_GET["do"] == "del_forum") {
           stdfoot();
 }
 
-if ($_GET["do"] == "del_forumcat") {
+if (isset($do) && $do == "del_forumcat") {
     
     $id = (int) $_GET["id"];
 
@@ -4756,7 +4762,7 @@ if ($_GET["do"] == "del_forumcat") {
           stdfoot();
 }
 
-if ($_GET["do"] == "edit_forumcat") {
+if (isset($do) && $do == "edit_forumcat") {
     
     $id = (int) $_GET["id"];
 
@@ -4791,10 +4797,16 @@ if ($_GET["do"] == "edit_forumcat") {
         $allcat = mysqli_num_rows($query);
         $forumcat = array();
         while ($row = mysqli_fetch_array($query))
-            $forumcat[] = $row;
+        $forumcat[] = $row;
 
-        echo "
-    <form action='admincp.php' method='post'>   
+// --- Lägg till detta ---
+$sid = $_POST['sid'] ?? 0;
+$new_forum_name = $_POST['new_forum_name'] ?? '';
+$new_forum_sort = $_POST['new_forum_sort'] ?? '';
+$new_desc = $_POST['new_desc'] ?? '';
+// -------------------------
+
+        echo "<form action='admincp.php' method='post'>   
     <input type='hidden' name='sid' value='$sid' />
 <input type='hidden' name='action' value='forum' />
 <input type='hidden' name='do' value='add_this_forum' />
@@ -4868,6 +4880,12 @@ if ($allforums == 0) {
         foreach ($forumcat as $cat)
             if ($cat['id'] == $row['category'])
                 $category = $cat['name'];
+
+// --- Lägg till detta ---
+$category = $_POST['category'] ?? 0;
+$new_forumcat_name = $_POST['new_forumcat_name'] ?? '';
+$new_forumcat_sort = $_POST['new_forumcat_sort'] ?? '';
+// -------------------------
             
             echo "<tr><td class='table_col1' width='60' align='center'><font size='2'><b>ID($row[id])</b></font></td><td class='table_col2' width='120'> $row[name]</td><td class='table_col1'  width='250'>$row[description]</td><td class='table_col2' width='45' align='center'>$row[sort]</td><td class='table_col1' width='45'>$category</td>\n";
             echo "<td class='table_col2' width='18' align='center'><a href='admincp.php?action=forum&amp;do=edit_forum&amp;id=$row[id]'>[".T_("EDIT")."]</a></td>\n";

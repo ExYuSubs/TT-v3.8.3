@@ -1,14 +1,4 @@
 <?php
-
-#================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
-#--------------------------------#
-#       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
-#================================#
-
 // Silence notices/warnings in output
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 ini_set('display_errors', 0);
@@ -79,7 +69,7 @@ foreach (["port","downloaded","uploaded","left"] as $x) {
     $GLOBALS[$x] = isset($_GET[$x]) ? (int)$_GET[$x] : 0;
 }
 
-// Passkey
+// passkey може да съдържа ?key=value
 if ($passkey && strpos($passkey, "?") !== false) {
     $tmp = substr($passkey, strpos($passkey, "?"));
     $passkey = substr($passkey, 0, strpos($passkey, "?"));
@@ -88,7 +78,7 @@ if ($passkey && strpos($passkey, "?") !== false) {
     $GLOBALS[$tmpname] = $tmpvalue;
 }
 
-// Passkey download
+// проверка за липсващи ключове
 foreach (["passkey","info_hash","peer_id","port","downloaded","uploaded","left"] as $x) {
     if (!isset($GLOBALS[$x])) err("Missing key: $x");
 }

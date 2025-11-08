@@ -1,14 +1,5 @@
 <?php
 
-#================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
-#--------------------------------#
-#       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
-#================================#
-
 // --- PHP8+ compatibility: defaults for possibly-missing POST keys ---
 $_POST = $_POST ?? [];
 $_GET  = $_GET  ?? [];

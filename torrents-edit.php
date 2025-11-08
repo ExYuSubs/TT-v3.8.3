@@ -1,14 +1,12 @@
 <?php
-
 #================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
+#       TorrentTrader 3.00       #
+#  http://www.torrenttrader.uk   #
 #--------------------------------#
 #       Created by M-Jay         #
-#       Modified by MicroMonkey, #
+#       Modified by MicroMonkey  #
 #       Coco, Botanicar          #
 #================================#
-
 
 require_once("backend/functions.php");
 dbconn();
@@ -114,6 +112,13 @@ if ($action=="doedit"){
             $updateset[] = "nfo = 'yes'";
         }//success
     }
+  
+    if (!empty($_POST["name"]))
+     $updateset[] = "name = " . sqlesc($_POST["name"]);
+    if ( $_POST['imdb'] != $row['imdb'] ){
+    $updateset[] = "imdb = " . sqlesc($_POST["imdb"]);
+    $TTCache->Delete("imdb/$id");
+   }
 
     if (!empty($_POST["name"]))
          $updateset[] = "name = " . sqlesc($_POST["name"]);
@@ -139,25 +144,13 @@ if ($action=="doedit"){
     $updateset[] = "anon = '" . ($_POST["anon"] ? "yes" : "no") . "'";
 
     //update images
-    $img1action = $_POST['img1action'];
-    if ($img1action == "update")
-        $updateset[] = "image1 = " .sqlesc(uploadimage(0, $row["image1"], $id));
-    if ($img1action == "delete") {
-        if ($row[image1]) {
-            $del = unlink($site_config["torrent_dir"]."/images/$row[image1]");
-            $updateset[] = "image1 = ''";
-        }
-    }
+    if ( $_POST['poster'] != $row['poster'] ){
+    $updateset[] = "poster = " . sqlesc($_POST["poster"]);
+}
 
-    $img2action = $_POST['img2action'];
-    if ($img2action == "update")
-        $updateset[] = "image2 = " .sqlesc(uploadimage(1, $row["image2"], $id));
-    if ($img2action == "delete") {
-        if ($row[image2]) {
-            $del = unlink($site_config["torrent_dir"]."/images/$row[image2]");
-            $updateset[] = "image2 = ''";
-        }
-    }
+    if ( $_POST['poster2'] != $row['poster2'] ){
+    $updateset[] = "poster2 = " . sqlesc($_POST["poster2"]);
+}
 
 
     SQL_Query_exec("UPDATE torrents SET " . join(",", $updateset) . " WHERE id = $id");
@@ -224,9 +217,9 @@ if (isset($_GET["returnto"]))
     print("<input type=\"hidden\" name=\"returnto\" value=\"" . htmlspecialchars($_GET["returnto"]) . "\" />\n");
 
 print("<table class='table_table' cellspacing='0' cellpadding='4' width='586' align='center'>\n");
-echo "<tr><td class='table_col1' align='right' width='60'><b>".T_("NAME").": </b></td><td class='table_col2' ><input type=\"text\" name=\"name\" value=\"" . htmlspecialchars($row["name"]) . "\" size=\"60\" /></td></tr>";
-echo "<tr><td class='table_col1'  align='right'><b>".T_("IMAGE").": </b></td><td class='table_col2'><b>".T_("IMAGE")." 1:</b>&nbsp;&nbsp;<input type='radio' name='img1action' value='keep' checked='checked' />".T_("KEEP_IMAGE")."&nbsp;&nbsp;"."<input type='radio' name='img1action' value='delete' />".T_("DELETE_IMAGE")."&nbsp;&nbsp;"."<input type='radio' name='img1action' value='update' />".T_("UPDATE_IMAGE")."<br /><input type='file' name='image0' size='60' /> <br /><br /> <b>".T_("IMAGE")." 2:</b>&nbsp;&nbsp;<input type='radio' name='img2action' value='keep' checked='checked' />".T_("KEEP_IMAGE")."&nbsp;&nbsp;"."<input type='radio' name='img2action' value='delete' />".T_("DELETE_IMAGE")."&nbsp;&nbsp;"."<input type='radio' name='img2action' value='update' />".T_("UPDATE_IMAGE")."<br /><input type='file' name='image1' size='60' /></td></tr>";
-echo "<tr><td class='table_col1'  align='right'><b>".T_("NFO").": </b><br /></td><td class='table_col2' ><input type='radio' name='nfoaction' value='keep' checked='checked' />Keep NFO &nbsp; <input type='radio' name='nfoaction' value='update' />Update NFO:";
+echo "<tr><td class='css' align='left' width='60'><b>".T_("NAME").": </b></td><td class='table_col2' ><input type=\"text\" name=\"name\" value=\"" . htmlspecialchars($row["name"]) . "\" size=\"60\" /></td></tr>";
+echo "<tr><td class='css'  align='left'><b>".T_("IMAGE").": </b></td><td class='table_col2'><b>".T_("IMAGE")." 1:</b>&nbsp;&nbsp;<input type='radio' name='img1action' value='keep' checked='checked' />".T_("KEEP_IMAGE")."&nbsp;&nbsp;"."<input type='radio' name='img1action' value='delete' />".T_("DELETE_IMAGE")."&nbsp;&nbsp;"."<input type='radio' name='img1action' value='update' />".T_("UPDATE_IMAGE")."<br /><input type='text' name='poster' size='60' /> <br /><br /> <b>".T_("IMAGE")." 2:</b>&nbsp;&nbsp;<input type='radio' name='img2action' value='keep' checked='checked' />".T_("KEEP_IMAGE")."&nbsp;&nbsp;"."<input type='radio' name='img2action' value='delete' />".T_("DELETE_IMAGE")."&nbsp;&nbsp;"."<input type='radio' name='img2action' value='update' />".T_("UPDATE_IMAGE")."<br /><input type='text' name='poster2' size='60' /></td></tr>";
+echo "<tr><td class='css'  align='left'><b>".T_("NFO").": </b><br /></td><td class='table_col2' ><input type='radio' name='nfoaction' value='keep' checked='checked' />Keep NFO &nbsp; <input type='radio' name='nfoaction' value='update' />Update NFO:";
 if ($row["nfo"] == "yes"){
     echo "&nbsp;&nbsp;<a href='nfo-view.php?id=".$row["id"]."' target='_blank'>[".T_("VIEW_CURRENT_NFO")."]</a>";
 } else{
@@ -234,13 +227,15 @@ if ($row["nfo"] == "yes"){
 }
 echo "<br /><input type='file' name='nfofile' size='60' /></td></tr>";
 
-echo "<tr><td class='table_col1' align='right'><b>".T_("CATEGORIES").": </b></td><td class='table_col2'>".$catdropdown."</td></tr>";
+echo "<tr><td class='css' align='left'><b>".T_("CATEGORIES").": </b></td><td class='table_col2'>".$catdropdown."</td></tr>";
 
-echo "<tr><td class='table_col1' align='right'><b>".T_("LANG").": </b></td><td class='table_col2'>".$langdropdown."</td></tr>";
+echo "<tr><td class='css' align='left'><b>".T_("IMDB")."</b></td><td class='table_col2'><input type=\"text\" name=\"imdb\" value=\"" . htmlspecialchars($row["imdb"]) . "\" size=\"60\" /></td></tr>";
+
+echo "<tr><td class='css' align='left'><b>".T_("LANG").": </b></td><td class='table_col2'>".$langdropdown."</td></tr>";
 
 if ($CURUSER["edit_torrents"] == "yes")
-    echo "<tr><td class='table_col1' align='right'><b>".T_("BANNED").": </b></td><td class='table_col2'><input type=\"checkbox\" name=\"banned\"" . (($row["banned"] == "yes") ? " checked=\"checked\"" : "" ) . " value=\"1\" /> ".T_("BANNED")."?<br /></td></tr>";
-echo "<tr><td class='table_col1' align='right'><b>".T_("VISIBLE").": </b></td><td class='table_col2'><input type=\"checkbox\" name=\"visible\"" . (($row["visible"] == "yes") ? " checked=\"checked\"" : "" ) . " value=\"1\" /> " .T_("VISIBLEONMAIN"). "<br /></td></tr>";
+    echo "<tr><td class='css' align='left'><b>".T_("BANNED").": </b></td><td class='table_col2'><input type=\"checkbox\" name=\"banned\"" . (($row["banned"] == "yes") ? " checked=\"checked\"" : "" ) . " value=\"1\" /> ".T_("BANNED")."?<br /></td></tr>";
+echo "<tr><td class='css' align='left'><b>".T_("VISIBLE").": </b></td><td class='table_col2'><input type=\"checkbox\" name=\"visible\"" . (($row["visible"] == "yes") ? " checked=\"checked\"" : "" ) . " value=\"1\" /> " .T_("VISIBLEONMAIN"). "<br /></td></tr>";
 
 if ($row["external"] != "yes" && $CURUSER["edit_torrents"] == "yes"){
     echo "<tr><td class='table_col1' align='right'><b>".T_("FREE_LEECH").": </b></td><td class='table_col2'><input type=\"checkbox\" name=\"freeleech\"" . (($row["freeleech"] == "1") ? " checked=\"checked\"" : "" ) . " value=\"1\" />".T_("FREE_LEECH_MSG")."<br /></td></tr>";

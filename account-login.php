@@ -1,15 +1,5 @@
 <?php
-
-#================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
-#--------------------------------#
-#       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
-#================================#
-
-
+// Updated login for sql security May 14 2023
 require_once("backend/functions.php");
 dbconn();
 session_start();

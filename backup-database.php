@@ -1,14 +1,11 @@
 <?php
-
-#================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
-#--------------------------------#
-#       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
-#================================#
-
+//# For Security Purposes if you wish to use it.
+//if ( $_SERVER['PHP_AUTH_USER'] != 'username' && $_SERVER['PHP_AUTH_PASS'] != 'password' )
+//{
+//	  header('WWW-Authenticate: Basic realm="your_site"');
+//	  header('HTTP/1.1 401 Unauthorized');
+//	  die;
+//}
   require_once("backend/functions.php");
 
   // CONNECT TO THE DATABASE

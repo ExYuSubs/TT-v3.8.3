@@ -1,14 +1,8 @@
 <?php
-
-#================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
-#--------------------------------#
-#       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
-#================================#
-
+// Enable error reporting for development
+// ini_set('display_errors', 1); // Display errors on the screen
+// ini_set('display_startup_errors', 1); // Display errors during PHP startup
+// error_reporting(E_ALL); // Report all errors, warnings, and notices
 require_once("backend/functions.php");
 dbconn(true);
 loggedinonly();

@@ -1,13 +1,4 @@
 <?php
-
-#================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
-#--------------------------------#
-#       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
-#================================#
 require_once("backend/functions.php");
 dbconn();
 session_start();
@@ -61,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_GET["take"] == 1) {
 
             $body = T_("SOMEONE_FROM")." " . $_SERVER["REMOTE_ADDR"] . " ".T_("MAILED_BACK")." ($email) ".T_("BE_MAILED_BACK")." \r\n\r\n ".T_("ACCOUNT_INFO")." \r\n\r\n ".T_("USERNAME").": ".$arr["username"]." \r\n ".T_("CHANGE_PSW")."\n\n$site_config[SITEURL]/account-recover.php?id=$id&secret=$secmd5\n\n\n".$site_config["SITENAME"]."\r\n";
             
-            @sendmail($arr["email"], T_("ACCOUNT_DETAILS"), $body, "", "-f".$site_config['SITEEMAIL']);
+            sendmail($arr["email"], T_("ACCOUNT_DETAILS"), $body, "", "-f".$site_config['SITEEMAIL']);
            
               $res2 = SQL_Query_exec("UPDATE `users` SET `secret` = ".sqlesc($sec)." WHERE `email`= ". sqlesc($email) ." LIMIT 1");
 

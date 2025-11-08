@@ -1,14 +1,11 @@
 <?php
-
 #================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
+#       TorrentTrader 3.00       #
+#  http://www.torrenttrader.uk   #
 #--------------------------------#
 #       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
+#       Modified by Botanicar    #
 #================================#
-
 
 require_once("backend/functions.php");
 dbconn();
@@ -93,8 +90,16 @@ if (($_POST["takeupload"] ?? '') === "yes") {
 
 	if (!empty($_POST["name"]))
 		$name = $_POST["name"];
+        $tmpname = $f['tmp_name'];
         
-    $tmpname = $f['tmp_name'];
+     if (!empty($_POST['imdb']))
+           $imdb = unesc($_POST['imdb']);
+
+     if (!empty($_POST['poster']))
+           $poster = unesc($_POST['poster']);
+
+     if (!empty($_POST['poster2']))
+           $poster2 = unesc($_POST['poster2']);
 
 	//end check form data
 
@@ -168,8 +173,10 @@ if (($_POST["takeupload"] ?? '') === "yes") {
 			$y = $x + 1;
 
 
-			if ($_FILES['image$x']['size'] > $site_config['image_max_filesize'])
-				show_error_msg(T_("ERROR"), T_("INVAILD_FILE_SIZE_IMAGE"), 1);
+       if (isset($_FILES["image{$x}"]) && $_FILES["image{$x}"]['size'] > $site_config['image_max_filesize']) {
+        show_error_msg(T_("ERROR"), T_("INVAILD_FILE_SIZE_IMAGE"), 1);
+         }
+
 
 			$uploaddir = $site_config["torrent_dir"]."/images/";
 
@@ -212,7 +219,9 @@ if (($_POST["takeupload"] ?? '') === "yes") {
 	
 	$inames0 = isset($inames[0]) && $inames[0] !== '' ? $inames[0] : null;
 	$inames1 = isset($inames[1]) && $inames[1] !== '' ? $inames[1] : null;
-	$ret = SQL_Query_exec("INSERT INTO torrents (filename, owner, name, descr, image1, image2, category, added, info_hash, size, numfiles, save_as, announce, external, nfo, torrentlang, anon, last_action) VALUES (".sqlesc($fname).", '".$CURUSER['id']."', ".sqlesc($name).", ".sqlesc($descr).", '$inames0', '$inames1', '".$catid."', '" . get_date_time() . "', '".$infohash."', '".$torrentsize."', '".$filecount."', ".sqlesc($fname).", '".$announce."', '".$external."', '".$nfo."', '".$langid."','$anon', '".get_date_time()."')");
+$ret = SQL_Query_exec("INSERT INTO torrents 
+(filename, owner, name, descr, poster, poster2, category, added, info_hash, size, numfiles, save_as, announce, external, nfo, torrentlang, anon, last_action, imdb) 
+VALUES (".sqlesc($fname).", '".$CURUSER['id']."', ".sqlesc($name).", ".sqlesc($descr).", ".sqlesc($poster).", ".sqlesc($poster2).", '".$catid."', '" . get_date_time() . "', '".$infohash."', '".$torrentsize."', '".$filecount."', ".sqlesc($fname).", '".$announce."', '".$external."', '".$nfo."', '".$langid."', '$anon', '".get_date_time()."', ".sqlesc($imdb).")");
 
 	$id = mysqli_insert_id($GLOBALS["DBconnector"]);
 	
@@ -303,11 +312,11 @@ begin_frame(T_("UPLOAD"));
 <table border="0" cellspacing="0" cellpadding="6" align="center">
 <?php
 echo "<br />";
-print ("<tr><td align='left' valign='top' class='css'>" . T_("ANNOUNCE_URL") . ": </td><td align='right' class='css-right'>");
+print ("<tr><td align='left' valign='top' class='css'>" . T_("ANNOUNCE_URL") . ": </td><td align='left' class='css-right'>");
 
 // The button used to copy the announce
 foreach($announce_urls as $key => $value) {
-	echo ' ' . $value . ' ';
+	echo '<input type="text" id="myInput" size="40" readonly value="' . $value . '" />';
 }
 ?>
 
@@ -390,7 +399,7 @@ function copyToClipboard(button) {
     popup.classList.remove("show");
   }, 2000);
 }
-</script> </td></tr>
+</script>
 	
 <form name="upload" enctype="multipart/form-data" action="torrents-upload.php" method="post">
 <input type="hidden" name="takeupload" value="yes" />
@@ -402,28 +411,23 @@ if ($site_config["ALLOWEXTERNAL"]) {
 }
 
 print("</td></tr>");
-print("<tr><td class='css' align='left'>" . T_("TORRENT_FILE") . ": </td><td class='css-right' align='left'> <input type='file' name='torrent' style='width:350px !important;' value='" . 
-    (isset($_FILES['torrent']['name']) ? htmlspecialchars($_FILES['torrent']['name'], ENT_QUOTES, 'UTF-8') : '') . 
-    "' />\n</td></tr>");
-print("<tr><td class='css' align='left'>" . T_("NFO") . ": </td><td class='css-right' align='left'> <input type='file' name='nfo' style='width:350px !important;' value='" . 
-    (isset($_FILES['nfo']['name']) ? htmlspecialchars($_FILES['nfo']['name'], ENT_QUOTES, 'UTF-8') : '') . 
-    "' /><br />\n</td></tr>");
-print("<tr><td class='css' align='left'>" . T_("TORRENT_NAME") . ": </td><td class='css-right' align='left'><input type='text' name='name' style='width:500px !important;' value='" . 
-    (isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8') : '') . 
-    "' /><br />" . T_("THIS_WILL_BE_TAKEN_TORRENT") . " \n</td></tr>");
-print("<tr><td colspan='2' class='css-right' align='center'><font color='Red'>" . T_("MAX_FILE_SIZE") . ": " . mksize($site_config['image_max_filesize']) . " " . 
-    T_("ACCEPTED_FORMATS") . ": " . implode(", ", array_unique($site_config["allowed_image_types"])) . 
-    "<br /></font></td></tr><tr><td class='css' align='left'>" . T_("IMAGE") . " 1:&nbsp;&nbsp;</td><td class='css-right' align='left'><input type='file' name='image0' style='width:350px !important;' /></td></tr>
-	<tr><td class='css' align='left'>" . T_("IMAGE") . " 2:&nbsp;&nbsp;</td><td class='css-right' align='left'><input type='file' name='image1' style='width:350px !important;' /></td></tr>");
+print("<tr><td class='css' align='left'>" . T_("TORRENT_FILE") . ": </td><td class='css-right' align='left'> <input type='file' name='torrent' style='width:350px !important;' value='" .(isset($_FILES['torrent']['name']) ? htmlspecialchars($_FILES['torrent']['name'], ENT_QUOTES, 'UTF-8') : '') . "' />\n</td></tr>");
+print("<tr><td class='css' align='left'>" . T_("NFO") . ": </td><td class='css-right' align='left'> <input type='file' name='nfo' style='width:350px !important;' value='" . (isset($_FILES['nfo']['name']) ? htmlspecialchars($_FILES['nfo']['name'], ENT_QUOTES, 'UTF-8') : '') . "' /><br />\n</td></tr>");
+print("<tr><td class='css' align='left'>" . T_("TORRENT_NAME") . ": </td><td class='css-right' align='left'><input type='text' name='name' style='width:500px !important;' value='" . (isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8') : '') . "' /><br />" . T_("THIS_WILL_BE_TAKEN_TORRENT") . " \n</td></tr>");
 
+print ("<tr><td class='css' align='left'>" . T_("IMDB") . ": </td><td class='css-right' align='left'> <input type='text' name='imdb' size='60' value='" . htmlspecialchars($_POST['imdb'] ?? '', ENT_QUOTES, 'UTF-8') . "' /><br />(Link from IMDB. <b>Only for movie.</b>)<br /><font color=red><b>You Must include a Imdb at all times on Upload</b></font>\n</td></tr>");
 
-$category = "<select name='type' style='width:350px !important;'>\n<option value='0'>" . T_("CHOOSE_ONE") . "</option>\n";
+print ("<tr><td class='css' align='left'>" . T_("IMAGE") . " 1: </td><td class='css-right' align='left'> <input type='text' name='poster' size='60' value='" . htmlspecialchars($_POST['poster'] ?? '', ENT_QUOTES, 'UTF-8') . "' /> </td></tr>");
 
-$cats = genrelist();
-foreach ($cats as $row)
-	$category .= "<option value=' " . $row["id"] . " '>" . htmlspecialchars($row["parent_cat"]) . ": " . htmlspecialchars($row["name"]) . "</option>\n";
+print ("<tr><td class='css' align='left'>" . T_("IMAGE") . " 2: </td><td class='css-right' align='left'> <input type='text' name='poster2' size='60' value='" . htmlspecialchars($_POST['poster2'] ?? '', ENT_QUOTES, 'UTF-8') . "' /> </td></tr>");
 
-$category .= "</select>\n";
+               $category = "<select name='type' style='width:350px !important;'>\n<option value='0'>" . T_("CHOOSE_ONE") . "</option>\n";
+
+               $cats = genrelist();
+		foreach ($cats as $row)
+               $category .= "<option value=' " . $row["id"] . " '>" . htmlspecialchars($row["name"]) . ": " . htmlspecialchars($row["parent_cat"]) . "</option>\n";
+
+               $category .= "</select>\n";
 print ("<tr><td class='css' align='left'>" . T_("CATEGORY") . ": </td><td class='css-right' align='left'>".$category."</td></tr>");
 
 

@@ -9,7 +9,6 @@
 #       Coco, Botanicar          #
 #================================#
 
-
 require_once("backend/functions.php");
 require_once("backend/BDecode.php");
 dbconn();
@@ -33,7 +32,7 @@ if (!is_valid_id($id))
 	show_error_msg(T_("ERROR"), T_("THATS_NOT_A_VALID_ID"), 1);
 
 //GET ALL MYSQL VALUES FOR THIS TORRENT
-$res = SQL_Query_exec("SELECT torrents.anon, torrents.seeders, torrents.banned, torrents.leechers, torrents.info_hash, torrents.filename, torrents.nfo, torrents.last_action, torrents.numratings, torrents.name, torrents.owner, torrents.save_as, torrents.descr, torrents.visible, torrents.size, torrents.added, torrents.views, torrents.hits, torrents.times_completed, torrents.id, torrents.type, torrents.external, torrents.image1, torrents.image2, torrents.announce, torrents.numfiles, torrents.freeleech, IF(torrents.numratings < 2, NULL, ROUND(torrents.ratingsum / torrents.numratings, 1)) AS rating, torrents.numratings, categories.name AS cat_name, torrentlang.name AS lang_name, torrentlang.image AS lang_image, categories.parent_cat as cat_parent, users.username, users.privacy FROM torrents LEFT JOIN categories ON torrents.category = categories.id LEFT JOIN torrentlang ON torrents.torrentlang = torrentlang.id LEFT JOIN users ON torrents.owner = users.id WHERE torrents.id = $id");
+$res = SQL_Query_exec("SELECT torrents.anon, torrents.seeders, torrents.banned, torrents.leechers, torrents.info_hash, torrents.filename, torrents.nfo, torrents.last_action, torrents.numratings, torrents.name, torrents.imdb, torrents.owner, torrents.save_as, torrents.descr, torrents.visible, torrents.size, torrents.added, torrents.views, torrents.hits, torrents.times_completed, torrents.id, torrents.type, torrents.external, torrents.poster, torrents.poster2, torrents.announce, torrents.numfiles, torrents.freeleech, IF(torrents.numratings < 2, NULL, ROUND(torrents.ratingsum / torrents.numratings, 1)) AS rating, torrents.numratings, categories.name AS cat_name, torrentlang.name AS lang_name, torrentlang.image AS lang_image, categories.parent_cat as cat_parent, users.username, users.privacy FROM torrents LEFT JOIN categories ON torrents.category = categories.id LEFT JOIN torrentlang ON torrents.torrentlang = torrentlang.id LEFT JOIN users ON torrents.owner = users.id WHERE torrents.id = $id");
 $row = mysqli_fetch_assoc($res);
 
 //DECIDE IF TORRENT EXISTS
@@ -238,7 +237,7 @@ echo "</table></fieldset><br /><br />";
 
 // $srating IS RATING VARIABLE
 		$srating = "";
-		$srating .= "<table class='f-border' cellspacing=\"1\" cellpadding=\"4\" width='100%'><tr><td class='f-title' width='60'><b>".T_("RATINGS").":</b></td><td class='f-title' valign='middle'>";
+		$srating .= "<table cellspacing=\"5\" cellpadding=\"5\" width='100%'><tr><td class='css-right' width='60'><b>".T_("RATINGS").":</b></td><td class='css' valign='middle'>";
 		if (!isset($row["rating"])) {
 				$srating .= "Not Yet Rated";
 		}else{
@@ -279,52 +278,114 @@ echo "</table></fieldset><br /><br />";
 		}
 		$srating .= "</td></tr></table>";
 
-print("<center>". $srating . "</center>");// rating
+print("<div class='alert alert-success alert-white rounded'>
+    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'> x </button>
+    <div class='icon'><i class='fa fa-check'></i></div><center>". $srating . "</center></div>");// rating
 
-//END DEFINE RATING VARIABLE
+       //===| Start IMDb
+		$TTIMDB = new TTIMDB;
 
+		if ((($_data = $TTCache->Get("imdb/$id", 900)) === false) && ($_data = $TTIMDB->Get($row['imdb'])))
+		{
+			$_data->Poster = $TTIMDB->getImage($_data->Poster, $id);
+			if ( ! isset( $_data->imdbTime ) )
+			{
+				$_data->imdbTime = time();
+				$_data->imdbVideo = null;
+			}
+			$TTCache->Set("imdb/$id", $_data, 900);
+		}
+
+		if ( is_object($_data) ): ?>
+		<fieldset class="download">
+			<legend><b><?php echo T_("IMDB_SHORT"); ?></b> &bull; <?php echo $_data->Title; ?></legend>                                                         
+			<table border="0" cellpadding="5" cellspacing="0" width="100%">
+				<tr>
+					<td width="230" class="css" rowspan="2"><img src="<?php echo $_data->Poster; ?>" alt="<?php echo $_data->Title; ?>" title="<?php echo $_data->Title; ?>" class="rip" height="350px" width="244px" /></td>
+					<td valign="top" width="100%">
+					<?php if (($rating = $TTIMDB->getRating($_data->imdbRating)) !== null) { ?>
+					<table border="0" cellpadding="5" cellspacing="5" width="100%"><tr>
+					<td valign="top" width="100%">
+					<table border="0" cellpadding="5" cellspacing="5" width="100%">
+					<tr><td class="css" width="100"><b> Rating <b>:</td><td class="css-right" width="70%"><?php echo $TTIMDB->renderStars10($_data->imdbRating); ?></td></tr>
+					<tr><td class="css" width="100"><b><?php echo T_("IMDB_RATED"); ?></b>:</td><td class="css-right" width="70%">&nbsp;<?php echo $TTIMDB->getRated( $_data->Rated ); ?></td></tr>
+					<tr><td class="css" width="100"><b><?php echo T_("IMDB_VOTES"); ?></b>:</td><td class="css-right" width="70%">&nbsp;<?php echo $_data->imdbVotes; ?> </td></tr>
+					</table>
+					</td></tr></table>
+					<?php } else { ?>
+					<table border="0" cellpadding="5" cellspacing="5" width="100%">
+					<tr><td><img src="images/imdb/00.png" border="0"></td></tr>
+					<tr><td><?php echo T_("NOT_YET_RATED"); ?>...</td></tr>
+						</table>
+						<?php } ?>
+					</td></tr><tr><td valign="top" width="100%">
+					<table border="0" cellpadding="5" cellspacing="5" width="100%">
+					<tr><td class="css" width="100"><b><?php echo T_("IMDB_LINK"); ?></b>:</td><td class="css-right" width="70%"><a href="<?php echo $row['imdb']; ?>" target="_blank"><?php echo htmlspecialchars($row['imdb']); ?></a></td></tr>
+					<tr><td class="css" width="100"><b><?php echo T_("IMDB_RELEASED"); ?></b>:</td><td class="css-right" width="70%"><?php echo $TTIMDB->getReleased($_data->Released); ?></td></tr>
+					<tr><td class="css" width="100"><b><?php echo T_("IMDB_YEAR"); ?></b>:</td><td class="css-right" width="70%"><?php echo $_data->Year; ?></td></tr>
+					<tr><td class="css" width="100"><b><?php echo T_("IMDB_RUNTIME"); ?></b>:</td><td class="css-right" width="70%"><?php echo $_data->Runtime; ?></td></tr>
+					<tr><td class="css" width="100"><b><?php echo T_("IMDB_GENRE"); ?></b>:</td><td class="css-right" width="70%"><?php echo $_data->Genre; ?></td></tr>
+					<tr><td class="css" width="100"><b><?php echo T_("IMDB_DIRECTOR"); ?></b>:</td><td class="css-right" width="70%"><?php echo $_data->Director; ?></td></tr>
+					<tr><td class="css" width="100"><b><?php echo T_("IMDB_WRITER"); ?></b>:</td><td class="css-right" width="70%"><?php echo $_data->Writer; ?></td></tr>
+					<tr><td class="css" width="100"><b><?php echo T_("IMDB_ACTORS"); ?></b>:</td><td class="css-right" width="70%"><?php echo $_data->Actors; ?></td></tr>
+					<tr><td class="css" width="100"><b><?php echo T_("IMDB_PLOT"); ?></b>:</td><td class="css-right" width="70%"><?php echo $_data->Plot; ?></td></tr>
+					</table>
+					</td>
+					</tr>
+					<tr>
+					<td align="right" colspan="3"><b><?php echo T_("IMDB_LASTUPDATED"); ?></b> <i><?php echo $TTIMDB->getUpdated($_data->imdbTime); ?></i></td>
+				</tr>
+			</table>
+		</fieldset>
+		
+     <?php endif;?>
+
+		<table><tr><td height='20'>  </td></tr></table>
+
+<?php
 echo "<br />";
-                                                  
-$img1 = $row["image1"] ?? "";
-$img2 = $row["image2"] ?? "";
 
-//== iMDB fix ==//
+//== Disallowed because iMDB MOD we don't need it anymore ==//
 
+// Visa bara om BÅDE poster och poster2 finns
+if (!empty($row["poster"]) && !empty($row["poster2"])) {
 
+    echo "<fieldset><legend> Images </legend>";
+    echo "<table border='0' width='80%' cellspacing='5' cellpadding='5' align='center'><tr>";
 
-//== End iMDB ==//
+    echo "<td width='45%'><div><img src='" . $row["poster"] . "' width='100%' class='poster'></div></td>";
+    echo "<td width='9%'><div>&nbsp;</div></td>";
+    echo "<td width='45%'><div><img src='" . $row["poster2"] . "' width='100%' class='poster'></div></td>";
 
-if ($img1 || $img2) {
-    if ($img1) {
-        $img1 = "<img src='" . $site_config["SITEURL"] . "/uploads/images/$img1' width='150' border='0' alt='' />";
-    }
-    if ($img2) {
-        $img2 = "<img src='" . $site_config["SITEURL"] . "/uploads/images/$img2' width='150' border='0' alt='' />";
-    }
-
-    print("<center>" . $img1 . "&nbsp;&nbsp;" . $img2 . "</center><br />");
+    echo "</tr></table>";
+    echo "</fieldset>";
 }
 
+//== Disallowed because iMDB MOD we don't need it anymore ==//
 
 if ($row["external"]=='yes'){
-	print ("<br /><b>Tracker:</b><br /> ".htmlspecialchars($row['announce'])."<br />");
+	print ("<div class='alert alert-info alert-white rounded'>
+    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>  </button>
+    <div class='icon'><i class='fa fa-info-circle'></i></div><strong>Tracker:<strong><br /> ".htmlspecialchars($row['announce'])."<br /></div>");
 }
 
 $tres = SQL_Query_exec("SELECT * FROM `announce` WHERE `torrent` = $id");
 if (mysqli_num_rows($tres) > 1){
-	echo "<br /><b>".T_("THIS_TORRENT_HAS_BACKUP_TRACKERS")."</b><br />";
-	echo '<table cellpadding="1" cellspacing="2" class="table_table"><tr>';
+	echo "<div class='alert alert-info alert-white rounded'>
+    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>  </button>
+    <div class='icon'><i class='fa fa-info-circle'></i></div><strong>".T_("THIS_TORRENT_HAS_BACKUP_TRACKERS")."</b>&nbsp;<img src='images/plus.gif' id='pic1' onclick='klappe_torrent(1)' alt='' style='float:right' /><div id='k1' style='display: none;'><br />";
+	echo '<table cellpadding="5" cellspacing="5" class="table table-bordered" width="100%"><tr>';
 	echo '<th class="table_head">URL</th><th class="table_head">'.T_("SEEDERS").'</th><th class="table_head">'.T_("LEECHERS").'</th><th class="table_head">'.T_("COMPLETED").'</th></tr>';
 	$x = 1;
 	while ($trow = mysqli_fetch_assoc($tres)) {
 		$colour = $trow["online"] == "yes" ? "green" : "red";
-		echo "<tr class=\"table_col$x\"><td><font color=\"$colour\"><b>".htmlspecialchars($trow['url'])."</b></font></td><td align=\"center\">".number_format($trow["seeders"])."</td><td align=\"center\">".number_format($trow["leechers"])."</td><td align=\"center\">".number_format($trow["times_completed"])."</td></tr>";
+		echo "<tr class=\"table_col$x\"><td class='css'><font color=\"$colour\"><b>".htmlspecialchars($trow['url'])."</b></font></td><td align=\"center\" class='css-right'>".number_format($trow["seeders"])."</td><td align=\"center\" class='css'>".number_format($trow["leechers"])."</td><td align=\"center\" class='css-right'>".number_format($trow["times_completed"])."</td></tr>";
 		$x = $x == 1 ? 2 : 1;
 	}
-	echo '</table>';
+	echo '</table></div>';
 }
 
-echo "<br /><br /><b>".T_("FILE_LIST").":</b>&nbsp;<img src='images/plus.gif' id='pic1' onclick='klappe_torrent(1)' alt='' /><div id='k1' style='display: none;'><table align='center' cellpadding='0' cellspacing='0' class='table_table' border='1' width='100%'><tr><th width='50' class='table_head'>&nbsp;".T_("TYPE")."</th><th class='table_head' align='left'>&nbsp;".T_("FILE")."</th><th width='50' class='table_head'>&nbsp;".T_("SIZE")."</th></tr>";
+echo "<br /><br /><b>".T_("FILE_LIST").":</b>&nbsp;<img src='images/plus.gif' id='pic1' onclick='klappe_torrent(2)' alt='' style='float:right' /><div id='k2' style='display: none;'><table align='center' cellpadding='0' cellspacing='0' class='table_table' border='1' width='100%'><tr><th width='50' class='table_head'>&nbsp;".T_("TYPE")."</th><th class='table_head' align='left'>&nbsp;".T_("FILE")."</th><th width='50' class='table_head'>&nbsp;".T_("SIZE")."</th></tr>";
 $id = intval($id);  // Sanitize $id
 $fres = SQL_Query_exec("SELECT * FROM `files` WHERE `torrent` = $id ORDER BY `path` ASC");
 if (mysqli_num_rows($fres)) {
