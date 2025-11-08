@@ -1,5 +1,14 @@
 <?php
 
+#================================#
+#       TorrentTrader 3.8.3      #
+#  http://torrenttrader.uk       #
+#--------------------------------#
+#       Created by M-Jay         #
+#       Modified by MicroMonkey, #
+#       Coco, Botanicar          #
+#================================#
+
 $LANG = [];
 $LANG["PLURAL_FORMS"] = "n != 1";
 $LANG["READMORE"] = "Read More...";
