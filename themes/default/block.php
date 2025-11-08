@@ -1,4 +1,15 @@
 <?php
+
+#================================#
+#       TorrentTrader 3.8.3      #
+#  http://torrenttrader.uk       #
+#--------------------------------#
+#       Created by M-Jay         #
+#       Modified by MicroMonkey, #
+#       Coco, Botanicar          #
+#================================#
+
+
 //BEGIN FRAME
 function begin_frame($caption = "-", $align = "justify"){
     global $THEME, $site_config;

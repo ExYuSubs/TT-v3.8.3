@@ -1,10 +1,12 @@
 <?php
+
 #================================#
-#  http://www.torrenttrader.uk   #
-#       TorrentTrader 3.00       #
+#       TorrentTrader 3.8.3      #
+#  http://torrenttrader.uk       #
 #--------------------------------#
 #       Created by M-Jay         #
-#       Modified by Botanicar    #
+#       Modified by MicroMonkey, #
+#       Coco, Botanicar          #
 #================================#
 
 function_exists('T_') or die;
