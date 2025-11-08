@@ -1,16 +1,5 @@
 <?php
 
-#================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
-#--------------------------------#
-#       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
-#================================#
-
-
-
 // Enable error reporting for development
 ini_set('display_errors', 1); // Display errors on the screen
 ini_set('display_startup_errors', 1); // Display errors during PHP startup
@@ -1160,9 +1149,9 @@ function torrenttable($res) {
 			case 'external':
 				if ($site_config["ALLOWEXTERNAL"]){
 					if ($row["external"]=='yes')
-						print("<td class='ttable_col$x' align='center'><i class='fa-solid fa-house-signal' style='color:red; font-size:16px; text-shadow: 1px 2px 1px #000;'></i></td>\n");
+						print("<td class='ttable_col$x' align='center'><i class='fa-solid fa-house-signal' style='color:red; font-size:16px; text-shadow: 0px 1px 0px #777;'></i></td>\n");
 					else
-						print("<td class='ttable_col$x' align='center'><i class='fa-solid fa-house-chimney-window' style='color:green; font-size:16px; text-shadow: 1px 2px 1px #000;'></i></td>\n");
+						print("<td class='ttable_col$x' align='center'><i class='fa-solid fa-house-chimney-window' style='color:green; font-size:16px; text-shadow: 0px 1px 0px #777;'></i></td>\n");
 				}
 			break;
 			case 'added':

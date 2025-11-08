@@ -1,16 +1,5 @@
 <?php
 
-#================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
-#--------------------------------#
-#       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
-#================================#
-
-
-
 function SQL_Query($query) {
     return new SQL_Query($query);
 }

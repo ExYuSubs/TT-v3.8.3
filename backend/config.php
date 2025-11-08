@@ -1,16 +1,5 @@
 <?php
 
-#================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
-#--------------------------------#
-#       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
-#================================#
-
-
-
 //Access control
 if (php_sapi_name() !== 'cli' && !isset($_SERVER['HTTP_HOST'])) {
     http_response_code(403);
@@ -31,20 +20,20 @@ $site_config['avatar_max_filesize'] = 4 * MB;   // 1 MB (megabyte). Change as yo
 $site_config['ttversion'] = '3.8.3'; //DONT CHANGE THIS!
 
 // CLOUDFLARE TURNSTILE RECAPTCHA
-$site_config['CLOUDSITEKEY'] = ''; // Cloudflare turnstile captcha Sitekey
-$site_config['CLOUDSECRET'] = ''; // Cloudflare turnstile captcha Secretkey
+$site_config['CLOUDSITEKEY'] = 'Your Cloudflare key'; // Cloudflare turnstile captcha Sitekey
+$site_config['CLOUDSECRET'] = 'Your Cloudflare secret key'; // Cloudflare turnstile captcha Secretkey
 
 // NEW MEMEBER UPLOAD RATIO AND INVITES
-$site_config['new_member_upload_ratio'] = 10 * GB; // change the 2 for whatever you want in GB upload
-$site_config['new_member_invites'] = 1 ; // Every new user will get 0 invites to start with as a default. Change as you need
+$site_config['new_member_upload_ratio'] = 5 * GB; // change the 2 for whatever you want in GB upload
+$site_config['new_member_invites'] = 0 ; // Every new user will get 0 invites to start with as a default. Change as you need
 
 // UPLOAD AVATAR
 $site_config['AVATARUPLOAD'] = true;      // Enable / Disable upload avatar
 $site_config['avatar_dir'] = '/avatars';   // Dir where avatars are stored. chmod 777
 
-$site_config['SITENAME'] = 'Torrent Trader v 3.8.3';					//Site Name
-$site_config['SITEEMAIL'] = 'max@max.org';		//Emails will be sent from this address
-$site_config['SITEURL'] = 'https://max.org';	//Main Site URL
+$site_config['SITENAME'] = 'TorrentTrader v 3.8.3 test page';					//Site Name
+$site_config['SITEEMAIL'] = 'you@email.org';		//Emails will be sent from this address
+$site_config['SITEURL'] = 'https://tracker-page.org';	//Main Site URL
 $site_config['default_language'] = "1";						//DEFAULT LANGUAGE ID
 $site_config['default_theme'] = "1";						//DEFAULT THEME ID
 $site_config['CHARSET'] = "utf-8";						//Site Charset
@@ -54,7 +43,7 @@ $site_config['MEMBERSONLY_WAIT'] = false;					//ENABLE WAIT TIMES FOR BAD RATIO
 $site_config['ALLOWEXTERNAL'] = true;		//Enable Uploading of external tracked torrents
 $site_config['UPLOADERSONLY'] = false;		//Limit uploading to uploader group only
 $site_config['INVITEONLY'] = false;			//Only allow signups via invite
-$site_config['ENABLEINVITES'] = false;		// Enable invites regardless of INVITEONLY setting
+$site_config['ENABLEINVITES'] = true;		// Enable invites regardless of INVITEONLY setting
 $site_config['CONFIRMEMAIL'] = false;		//Enable / Disable Signup confirmation email
 $site_config['ACONFIRM'] = false;			//Enable / Disable ADMIN CONFIRM ACCOUNT SIGNUP
 $site_config['ANONYMOUSUPLOAD'] = false;		//Enable / Disable anonymous uploads
@@ -151,27 +140,24 @@ $site_config["ratiowarn_mingigs"] = 5;  //Min GB Downloaded
 $site_config["ratiowarn_daystowarn"] = 14; //Days to ban
 
 // category = Category Image/Name, name = Torrent Name, dl = Download Link, uploader, comments = # of comments, completed = times completed, size, seeders, leechers, health = seeder/leecher ratio, external, wait = Wait Time (if enabled), rating = Torrent Rating, added = Date Added, nfo = link to nfo (if exists)
-$site_config["torrenttable_columns"] = "category,name,size,seeders,leechers,comments,external";
+$site_config["torrenttable_columns"] = "category,name,added,size,seeders,leechers,comments,external";
 // size, speed, added = Date Added, tracker, completed = times completed
 $site_config["torrenttable_expand"] = "";
 
 // Caching settings
 $site_config["cache_type"] = "disk"; // disk = Save cache to disk, memcache = Use memcache, apc = Use APC, xcache = Use XCache
 $site_config["cache_memcache_host"] = "localhost"; // Host memcache is running on
-$site_config["cache_memcache_port"] = 11211; // Port memcache is running on
+$site_config["cache_memcache_port"] = 11611; // Port memcache is running on
 $site_config['cache_dir'] = getcwd().'/cache'; // Cache dir (only used if type is "disk"). Must be CHMOD 777
 
 
 // Mail settings
-// php to use PHP's built-in mail function. or pear to use http://pear.php.net/Mail
-// MUST use pear for SMTP
-$site_config["mail_type"] = "php";
-$site_config["mail_smtp_host"] = "localhost"; // SMTP server hostname
-$site_config["mail_smtp_port"] = "25"; // SMTP server port
-$site_config["mail_smtp_ssl"] = false; // true to use SSL
-$site_config["mail_smtp_auth"] = false; // true to use auth for SMTP
-$site_config["mail_smtp_user"] = ""; // SMTP username
-$site_config["mail_smtp_pass"] = ""; // SMTP password
+$site_config['smtp_host'] = 'smtp-relay.brevo.com';
+$site_config['smtp_port'] = 587;
+$site_config['smtp_user'] = 'your_brevo_login';
+$site_config['smtp_pass'] = 'your_brevo_password';
+$site_config['smtp_from'] = 'noreply@yourdomain.com';
+
 
 //Gmail settings
 // $site_config["mail_type"] = "pear";

@@ -1,15 +1,13 @@
 <?php
+// --- Inserted by assistant: fix warnings ---
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
 
-#================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
-#--------------------------------#
-#       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
-#================================#
+# Safely read mail_type to avoid undefined index and passing null to string functions
+$mail_type = $mail_type ?? '';
+$mail_type = is_string($mail_type) ? strtolower($mail_type) : '';
 
-
+// --- End of inserted block ---
 
 $GLOBALS["TTMail"] = new TTMail;
 

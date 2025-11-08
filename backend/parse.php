@@ -1,13 +1,17 @@
 <?php
 
-#================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
-#--------------------------------#
-#       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
-#================================#
+/*array info for ref:
+announce
+infohash
+creation date
+intenal name
+torrentsize
+filecount
+announceruls
+comment
+filelist
+*/
+
 
 function ParseTorrent($filename) {
 	require_once("BDecode.php") ;
@@ -64,7 +68,8 @@ function ParseTorrent($filename) {
 				//Get File List
 				if (isset($infovariable["files"]))  {
 					// Multi File Torrent
-					$filecount = "";
+					$filecount = 0;
+                    $torrentsize = 0;
 
 					//Get filenames here
 					$TorrentInfo[8] = $infovariable["files"];

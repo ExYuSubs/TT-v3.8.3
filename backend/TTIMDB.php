@@ -1,27 +1,21 @@
 <?php
 
-#================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
-#--------------------------------#
-#       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
-#================================#
-
-
-
 class TTIMDB
 {
-   private $_nodes = ['https://www.omdbapi.com/?apikey=YOUR_API_KEY_HERE&i=%s'];
+   private $_nodes = ['https://www.omdbapi.com/?apikey=2e3b07e4&i=%s'];
 
    public function get($uri = null)
-   {
-       if (preg_match('#tt(\d+)#', $uri, $m)) {
-           return $this->_try($m[0]);
-       }
-       return false;
-   }
+{
+    if (!is_string($uri)) {
+        return false;
+    }
+
+    if (preg_match('#tt(\d+)#', $uri, $m)) {
+        return $this->_try($m[0]);
+    }
+
+    return false;
+}
 
    private function _try($id)
    {
@@ -67,21 +61,22 @@ class TTIMDB
            : null;
    }
 
-   public function renderStars10($rating) {
-   if (empty($rating) || $rating === "N/A") {
-       return '<span class="no-rating">Not rated</span>';
-   }
+  public function renderStars10($rating) {
+    if (empty($rating) || $rating === "N/A") {
+        return '<span class="no-rating">Not rated</span>';
+    }
 
-   $stars = round($rating);
-   $html = '<div class="stars">';
-   for ($i = 1; $i <= 10; $i++) {
-       $html .= ($i <= $stars)
-           ? '<span class="star full">?</span>'
-           : '<span class="star empty">?</span>';
-   }
-   $html .= " <span class=\"rating-text\">($rating/10)</span></div>";
-   return $html;
+    $stars = round($rating);
+    $html = '<div class="stars">';
+    for ($i = 1; $i <= 10; $i++) {
+        $html .= ($i <= $stars)
+            ? '<span class="star full">★</span>'
+            : '<span class="star empty">☆</span>';
+    }
+    $html .= " <span class=\"rating-text\">($rating/10)</span></div>";
+    return $html;
 }
+
 
 
    public function getRated($rated) {

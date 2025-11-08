@@ -1,15 +1,4 @@
 <?php
-
-#================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
-#--------------------------------#
-#       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
-#================================#
-
-
 $wmi = new COM("Winmgmts://");
 $cpus = $wmi->InstancesOf("Win32_Processor");
 $os = $wmi->InstancesOf("Win32_OperatingSystem");
