@@ -134,7 +134,6 @@ tr.f-title, tr.p-title, .b-title {
 
 /* --- navigate: mörkt/ljust-kompatibel --- */
 #navigate {
-  border: 1px solid var(--border) !important;
   background: linear-gradient(to bottom, var(--card-bg-start) 0%, var(--card-bg-end) 100%) !important;
   color: var(--text) !important;
   border-radius: 4px;

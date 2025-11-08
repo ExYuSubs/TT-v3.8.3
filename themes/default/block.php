@@ -15,7 +15,6 @@ function begin_frame($caption = "-", $align = "justify"){
 function end_frame() {
     global $THEME, $site_config;
     print("</div></div>
-        <div class='myFrame-foot'></div>
       </div>
 	  <br />");
 }
@@ -36,13 +35,12 @@ function begin_block($caption = "-", $align = "justify"){
 function end_block(){
     global $THEME, $site_config;
     print("</div></div>
-        <div class='myBlock-foot'></div>
       </div>
 	  <br />");
 }
 
 function begin_table(){
-    print("<table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" class=\"ttable_headouter\" width=\"100%\"><tr><td><table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" class=\"ttable_headinner\" width=\"100%\">\n");
+    print("<table align=\"center\" cellpadding=\"5\" cellspacing=\"5\" class=\"ttable_headouter\" width=\"100%\"><tr><td><table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" class=\"ttable_headinner\" width=\"100%\">\n");
 }
 
 function end_table()  {
