@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 31, 2025 at 11:28 PM
--- Server version: 10.11.14-MariaDB
+-- Generation Time: Nov 08, 2025 at 10:25 PM
+-- Server version: 10.11.15-MariaDB
 -- PHP Version: 7.2.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ttv383`
+-- Database: `ttv383_db`
 --
 
 -- --------------------------------------------------------
@@ -68,51 +68,6 @@ CREATE TABLE `blocks` (
   `sort` int(11) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `blocks`
---
-
-INSERT INTO `blocks` (`id`, `named`, `name`, `position`, `description`, `enabled`, `sort`) VALUES
-(1, 'donate', 'donate', 'right', 'PAYPAL', 0, 0),
-(2, 'invite', 'invite', 'right', 'Description here...', 0, 0),
-(3, 'Main Navigation', 'navigate', 'right', 'Description here...', 1, 1),
-(4, 'Login Block', 'login', 'left', 'Description here...', 1, 1),
-(5, 'rss', 'rss', 'right', 'rss', 1, 2),
-(6, 'latestuploads', 'latestuploads', 'right', 'Description here...', 1, 3),
-(8, 'serverload', 'serverload', 'right', 'Description here...', 0, 0),
-(9, 'usersonline', 'usersonline', 'left', 'Description here...', 1, 2),
-(10, 'Main Category', 'maincats', 'left', 'Description here...', 1, 3),
-(11, 'simplesearch', 'simplesearch', 'right', 'Description here...', 0, 0),
-(12, 'advancesearch', 'advancesearch', 'middle', 'Description here...', 0, 0),
-(13, 'latestimages', 'latestimages', 'right', 'Description here...', 0, 0),
-(14, 'mostactivetorrents', 'mostactivetorrents', 'left', 'Description here...', 0, 0),
-(15, 'scrollingnews', 'scrollingnews', 'right', 'Description here...', 0, 0),
-(16, 'newestmember', 'newestmember', 'left', 'Description here...', 1, 4),
-(17, 'polls', 'polls', 'right', 'Description here...', 0, 0),
-(18, 'seedwanted', 'seedwanted', 'right', 'Description here...', 0, 0),
-(19, 'Theme & Language', 'themelang', 'left', 'Description here...', 0, 0),
-(20, 'Powered By', 'poweredby', 'right', 'Description here...', 0, 0),
-(21, 'admincp', 'admincp', 'left', '', 0, 0),
-(22, 'imdb', 'imdb', 'right', 'IMDB search block', 0, 0),
-(27, 'usersonlinetoday', 'usersonlinetoday', 'right', '', 1, 4),
-(29, 'foldermonitor', 'foldermonitor', 'right', '', 0, 0),
-(30, 'pornhub', 'pornhub', 'right', 'porn', 0, 0),
-(31, 'porn', 'porn', 'right', '', 0, 0),
-(33, 'clock-calendar', 'clock-callender', 'right', '', 0, 0),
-(34, 'Google', 'Google', 'right', '', 0, 0),
-(35, 'youtube', 'youtube', 'right', 'YOUTUBE', 0, 0),
-(36, 'lastups-scroll', 'lastups-scroll', 'right', '', 0, 0),
-(37, 'advancestats', 'advancestats', 'right', '', 0, 0),
-(38, 'latestrequest', 'latestrequest', 'right', 'Request block fuckers', 0, 0),
-(39, 'radio', 'radio', 'right', '', 0, 0),
-(40, 'dvd release dates', 'dvddates', 'right', 'Dvd release dates', 0, 0),
-(41, 'announcements', 'announcements', 'middle', 'ANNOUNCEMENTS PM', 0, 0),
-(44, 'teamspeak', 'teamspeak', 'right', 'TEAMSPEAK', 0, 0),
-(45, 'activetransfer', 'activetransfer', 'right', '', 0, 0),
-(46, 'TESTusersonline', 'TESTusersonline', 'left', '', 0, 0),
-(49, 'arma3', 'arma3', 'right', '', 0, 0),
-(48, 'arma3ARMAGEDDON', 'arma3ARMAGEDDON', 'right', '', 0, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -128,20 +83,6 @@ CREATE TABLE `categories` (
   `parent_cat` varchar(15) NOT NULL DEFAULT '',
   `sub_sort` char(3) NOT NULL DEFAULT ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `categories`
---
-
-INSERT INTO `categories` (`id`, `name`, `sort_index`, `image`, `subcat`, `parent_cat`, `sub_sort`) VALUES
-(1, 'Divx/Xvid', 1, 'Movies_Xvid.png', 'yes', 'Movies', '1'),
-(2, 'TV Shows', 2, 'TV_Xvid.png', 'yes', 'TV Shows', '2'),
-(3, 'PC', 3, 'appz.png', 'yes', 'Apps', '3'),
-(4, 'MP3', 4, 'mp3.png', 'yes', 'Music', '4'),
-(4, 'Miscellaneous', 5, 'cat_misc.png', 'no', 'Miscellaneous', ''),
-(6, 'Documentaries', 6, 'documentary.png', 'no', 'Documentary', ''),
-(7, 'Packs', 7, 'MoviesPacks.png', 'no', 'Movies', ''),
-(8, 'TV Packs', 8, 'TVPacks.png', 'no', 'TV Shows', '');
 
 -- --------------------------------------------------------
 
@@ -169,14 +110,6 @@ CREATE TABLE `comments` (
   `news` int(10) UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`id`, `user`, `torrent`, `added`, `text`, `news`) VALUES
-(1, 1, 1, '2025-09-29 19:55:41', '1-st comment', 0),
-(2, 1, 8, '2025-10-17 14:44:01', 'First comment on this torrent...', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -190,14 +123,6 @@ CREATE TABLE `completed` (
   `date` datetime DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `completed`
---
-
-INSERT INTO `completed` (`id`, `userid`, `torrentid`, `date`) VALUES
-(1, 1, 8, '2025-10-17 11:47:10'),
-(2, 5, 8, '2025-10-31 20:53:21');
-
 -- --------------------------------------------------------
 
 --
@@ -210,109 +135,6 @@ CREATE TABLE `countries` (
   `flagpic` varchar(50) DEFAULT NULL,
   `domain` char(3) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `countries`
---
-
-INSERT INTO `countries` (`id`, `name`, `flagpic`, `domain`) VALUES
-(1, 'Sweden', 'sweden.gif', 'SE'),
-(2, 'United States of America', 'usa.gif', 'US'),
-(3, 'Russia', 'russia.gif', 'RU'),
-(4, 'Finland', 'finland.gif', 'FI'),
-(5, 'Canada', 'canada.gif', 'CA'),
-(6, 'France', 'france.gif', 'FR'),
-(7, 'Germany', 'germany.gif', 'DE'),
-(8, 'China', 'china.gif', 'CN'),
-(9, 'Italy', 'italy.gif', 'IT'),
-(10, 'Denmark', 'denmark.gif', 'DK'),
-(11, 'Norway', 'norway.gif', 'NO'),
-(12, 'United Kingdom', 'uk.gif', 'UK'),
-(13, 'Ireland', 'ireland.gif', 'IE'),
-(14, 'Poland', 'poland.gif', 'PL'),
-(15, 'Netherlands', 'netherlands.gif', 'NL'),
-(16, 'Belgium', 'belgium.gif', 'BE'),
-(17, 'Japan', 'japan.gif', 'JP'),
-(18, 'Brazil', 'brazil.gif', 'BR'),
-(19, 'Argentina', 'argentina.gif', 'AR'),
-(20, 'Australia', 'australia.gif', 'AU'),
-(21, 'New Zealand', 'newzealand.gif', 'NZ'),
-(23, 'Spain', 'spain.gif', 'ES'),
-(24, 'Portugal', 'portugal.gif', 'PT'),
-(25, 'Mexico', 'mexico.gif', 'MX'),
-(26, 'Singapore', 'singapore.gif', 'SG'),
-(29, 'South Africa', 'southafrica.gif', 'ZA'),
-(30, 'South Korea', 'southkorea.gif', 'KR'),
-(31, 'Jamaica', 'jamaica.gif', 'JM'),
-(32, 'Luxembourg', 'luxembourg.gif', 'LU'),
-(33, 'Hong Kong', 'hongkong.gif', 'HK'),
-(34, 'Belize', 'belize.gif', 'BZ'),
-(35, 'Algeria', 'algeria.gif', 'DZ'),
-(36, 'Angola', 'angola.gif', 'AO'),
-(37, 'Austria', 'austria.gif', 'AT'),
-(38, 'Yugoslavia', 'yugoslavia.gif', 'YU'),
-(39, 'Western Samoa', 'westernsamoa.gif', 'WS'),
-(40, 'Malaysia', 'malaysia.gif', 'MY'),
-(41, 'Dominican Republic', 'dominicanrep.gif', 'DO'),
-(42, 'Greece', 'greece.gif', 'GR'),
-(43, 'Guatemala', 'guatemala.gif', 'GT'),
-(44, 'Israel', 'israel.gif', 'IL'),
-(45, 'Pakistan', 'pakistan.gif', 'PK'),
-(46, 'Czech Republic', 'czechrep.gif', 'CZ'),
-(47, 'Serbia', 'serbia.gif', 'YU'),
-(48, 'Seychelles', 'seychelles.gif', 'SC'),
-(49, 'Taiwan', 'taiwan.gif', 'TW'),
-(50, 'Puerto Rico', 'puertorico.gif', 'PR'),
-(51, 'Chile', 'chile.gif', 'CL'),
-(52, 'Cuba', 'cuba.gif', 'CU'),
-(53, 'Congo', 'congo.gif', 'CG'),
-(54, 'Afghanistan', 'afghanistan.gif', 'AF'),
-(55, 'Turkey', 'turkey.gif', 'TR'),
-(56, 'Uzbekistan', 'uzbekistan.gif', 'UZ'),
-(57, 'Switzerland', 'switzerland.gif', 'CH'),
-(58, 'Kiribati', 'kiribati.gif', 'KI'),
-(59, 'Philippines', 'philippines.gif', 'PH'),
-(60, 'Burkina Faso', 'burkinafaso.gif', 'BF'),
-(61, 'Nigeria', 'nigeria.gif', 'NG'),
-(62, 'Iceland', 'iceland.gif', 'IS'),
-(63, 'Nauru', 'nauru.gif', 'NR'),
-(64, 'Slovenia', 'slovenia.gif', 'SI'),
-(65, 'Albania', 'albania.gif', 'AL'),
-(66, 'Turkmenistan', 'turkmenistan.gif', 'TM'),
-(67, 'Bosnia Herzegovina', 'bosniaherzegovina.gif', 'BA'),
-(68, 'Andorra', 'andorra.gif', 'AD'),
-(69, 'Lithuania', 'lithuania.gif', 'LT'),
-(70, 'India', 'india.gif', 'IN'),
-(71, 'Netherlands Antilles', 'nethantilles.gif', 'AN'),
-(72, 'Ukraine', 'ukraine.gif', 'UA'),
-(73, 'Venezuela', 'venezuela.gif', 'VE'),
-(74, 'Hungary', 'hungary.gif', 'HU'),
-(75, 'Romania', 'romania.gif', 'RO'),
-(76, 'Vanuatu', 'vanuatu.gif', 'VU'),
-(77, 'Vietnam', 'vietnam.gif', 'VN'),
-(78, 'Trinidad &amp; Tobago', 'trinidadandtobago.gif', 'TT'),
-(79, 'Honduras', 'honduras.gif', 'HN'),
-(80, 'Kyrgyzstan', 'kyrgyzstan.gif', 'KG'),
-(81, 'Ecuador', 'ecuador.gif', 'EC'),
-(82, 'Bahamas', 'bahamas.gif', 'BS'),
-(83, 'Peru', 'peru.gif', 'PE'),
-(84, 'Cambodia', 'cambodia.gif', 'KH'),
-(85, 'Barbados', 'barbados.gif', 'BB'),
-(86, 'Bangladesh', 'bangladesh.gif', 'BD'),
-(87, 'Laos', 'laos.gif', 'LA'),
-(88, 'Uruguay', 'uruguay.gif', 'UY'),
-(89, 'Antigua Barbuda', 'antiguabarbuda.gif', 'AG'),
-(90, 'Paraguay', 'paraguay.gif', 'PY'),
-(92, 'Union of Soviet Socialist Republics', 'ussr.gif', 'SU'),
-(93, 'Thailand', 'thailand.gif', 'TH'),
-(94, 'Senegal', 'senegal.gif', 'SN'),
-(95, 'Togo', 'togo.gif', 'TG'),
-(96, 'North Korea', 'northkorea.gif', 'KP'),
-(97, 'Croatia', 'croatia.gif', 'HR'),
-(98, 'Estonia', 'estonia.gif', 'EE'),
-(99, 'Colombia', 'colombia.gif', 'CO'),
-(100, 'England', 'england.gif', 'GB'),
-(101, 'Egypt', 'egypt.gif', 'EG');
 
 -- --------------------------------------------------------
 
@@ -357,34 +179,6 @@ CREATE TABLE `files` (
   `path` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `filesize` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `files`
---
-
-INSERT INTO `files` (`id`, `torrent`, `path`, `filesize`) VALUES
-(1, 1, 'Blue.Lights.S03E06.1080p.iP.WEB-DL.AAC2.0.H.264-SAiNT.mkv', 2628567848),
-(2, 1, 'Blue.Lights.S03E02.1080p.iP.WEB-DL.AAC2.0.H.264-SAiNT.mkv', 2391252817),
-(3, 1, 'Blue.Lights.S03E03.1080p.iP.WEB-DL.AAC2.0.H.264-SAiNT.mkv', 2437821994),
-(4, 1, 'Blue.Lights.S03E04.1080p.iP.WEB-DL.AAC2.0.H.264-SAiNT.mkv', 1991561395),
-(5, 1, 'Blue.Lights.S03E05.1080p.iP.WEB-DL.AAC2.0.H.264-SAiNT.mkv', 2348387214),
-(6, 1, 'Blue.Lights.S03E01.1080p.iP.WEB-DL.AAC2.0.H.264-SAiNT.mkv', 2108329977),
-(7, 2, 'Showtrial.S01E01.1080p.AMZN.WEB-DL.DDP2.0.H.264-NTb.mkv', 4245948700),
-(8, 2, 'Showtrial.S01E02.1080p.AMZN.WEB-DL.DDP2.0.H.264-NTb.mkv', 4235839450),
-(9, 2, 'Showtrial.S01E03.1080p.AMZN.WEB-DL.DDP2.0.H.264-NTb.mkv', 4203684585),
-(10, 2, 'Showtrial.S01E04.1080p.AMZN.WEB-DL.DDP2.0.H.264-NTb.mkv', 4169878912),
-(11, 2, 'Showtrial.S01E05.1080p.AMZN.WEB-DL.DDP2.0.H.264-NTb.mkv', 4393989154),
-(12, 3, 'Play.Dirty.2025.DUB.MVO.WEB-DLRip-AVC.seleZen.mkv', 1934932566),
-(13, 4, 'Airplane.1980.720p.BDRip.AV1-FFE.mkv', 1390551626),
-(14, 5, 'Agatha.Christie.Towards.Zero.E01.1080p.WEBRip.x264.[ExYuSubs].mp4', 1077127767),
-(15, 5, 'ExYuSubs.nfo', 177),
-(16, 6, 'Agatha.Christie.Towards.Zero.E02.1080p.WEBRip.x264.[ExYuSubs].mp4', 1077151558),
-(17, 6, 'ExYuSubs.nfo', 177),
-(18, 7, 'Agatha.Christie.Towards.Zero.E03.1080p.WEBRip.x264.[ExYuSubs].mp4', 1076992630),
-(19, 7, 'ExYuSubs.nfo', 177),
-(20, 8, 'Agatha.Christie.Towards.Zero.E04.1080p.WEBRip.x264.[ExYuSubs].mp4', 1077031377),
-(21, 8, 'ExYuSubs.nfo', 177),
-(22, 9, 'The.Color.Purple.1985.1080p.BDRip.AV1-FFE.mkv', 4062530038);
 
 -- --------------------------------------------------------
 
@@ -491,20 +285,6 @@ CREATE TABLE `groups` (
   `staff_sort` tinyint(3) UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `groups`
---
-
-INSERT INTO `groups` (`group_id`, `level`, `view_torrents`, `edit_torrents`, `delete_torrents`, `view_users`, `edit_users`, `delete_users`, `view_news`, `edit_news`, `delete_news`, `can_upload`, `can_download`, `view_forum`, `edit_forum`, `delete_forum`, `control_panel`, `staff_page`, `staff_public`, `staff_sort`) VALUES
-(1, 'Member', 'yes', 'no', 'no', 'yes', 'no', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 7),
-(2, 'Power User', 'yes', 'no', 'no', 'yes', 'no', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 6),
-(3, 'VIP', 'yes', 'no', 'no', 'yes', 'no', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 5),
-(4, 'Uploader', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'yes', 'no', 4),
-(5, 'Moderator', 'yes', 'yes', 'no', 'yes', 'yes', 'no', 'yes', 'yes', 'no', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'yes', 'yes', 3),
-(6, 'Super Moderator', 'yes', 'yes', 'yes', 'yes', 'yes', 'no', 'yes', 'yes', 'no', 'yes', 'yes', 'yes', 'yes', 'yes', 'no', 'yes', 'yes', 2),
-(7, 'Administrator', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 1),
-(8, 'Site Owner', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 8);
-
 -- --------------------------------------------------------
 
 --
@@ -527,13 +307,6 @@ CREATE TABLE `languages` (
   `uri` varchar(255) NOT NULL DEFAULT '',
   `name` varchar(64) NOT NULL DEFAULT ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `languages`
---
-
-INSERT INTO `languages` (`id`, `uri`, `name`) VALUES
-(1, 'english.php', 'English');
 
 -- --------------------------------------------------------
 
@@ -662,7 +435,6 @@ CREATE TABLE `ratings` (
   `added` datetime DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
 -- --------------------------------------------------------
 
 --
@@ -734,13 +506,6 @@ CREATE TABLE `stylesheets` (
   `name` varchar(64) NOT NULL DEFAULT ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `stylesheets`
---
-
-INSERT INTO `stylesheets` (`id`, `uri`, `name`) VALUES
-(1, 'default', 'default');
-
 -- --------------------------------------------------------
 
 --
@@ -780,19 +545,6 @@ CREATE TABLE `torrentlang` (
   `sort_index` int(10) UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `torrentlang`
---
-
-INSERT INTO `torrentlang` (`id`, `name`, `image`, `sort_index`) VALUES
-(1, 'English', 'english.gif', 1),
-(2, 'French', 'french.jpg', 1),
-(3, 'German', 'german.jpg', 1),
-(4, 'Italian', 'italian.jpg', 1),
-(5, 'Japanese', 'japanese.jpg', 1),
-(6, 'Spanish', 'spanish.jpg', 1),
-(7, 'Russian', 'russian.jpg', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -806,8 +558,8 @@ CREATE TABLE `torrents` (
   `filename` varchar(255) NOT NULL DEFAULT '',
   `save_as` varchar(255) NOT NULL DEFAULT '',
   `descr` text NOT NULL,
-  `image1` text NOT NULL,
-  `image2` text NOT NULL,
+  `poster` varchar(255) DEFAULT NULL,
+  `poster2` varchar(255) DEFAULT NULL,
   `category` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `size` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `added` datetime DEFAULT NULL,
@@ -830,7 +582,8 @@ CREATE TABLE `torrents` (
   `announce` varchar(255) NOT NULL DEFAULT '',
   `external` enum('yes','no') NOT NULL DEFAULT 'no',
   `torrentlang` int(10) UNSIGNED NOT NULL DEFAULT 1,
-  `freeleech` enum('0','1') NOT NULL DEFAULT '0'
+  `freeleech` enum('0','1') NOT NULL DEFAULT '0',
+  `imdb` varchar(80) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -1168,7 +921,7 @@ ALTER TABLE `warnings`
 -- AUTO_INCREMENT for table `announce`
 --
 ALTER TABLE `announce`
-  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `bans`
@@ -1180,31 +933,31 @@ ALTER TABLE `bans`
 -- AUTO_INCREMENT for table `blocks`
 --
 ALTER TABLE `blocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `completed`
 --
 ALTER TABLE `completed`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `countries`
 --
 ALTER TABLE `countries`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `email_bans`
@@ -1222,7 +975,7 @@ ALTER TABLE `faq`
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `forumcats`
@@ -1258,25 +1011,25 @@ ALTER TABLE `forum_topics`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `group_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `group_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `languages`
 --
 ALTER TABLE `languages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -1288,7 +1041,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `peers`
 --
 ALTER TABLE `peers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pollanswers`
@@ -1318,7 +1071,7 @@ ALTER TABLE `rules`
 -- AUTO_INCREMENT for table `shoutbox`
 --
 ALTER TABLE `shoutbox`
-  MODIFY `msgid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `msgid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `sqlerr`
@@ -1330,7 +1083,7 @@ ALTER TABLE `sqlerr`
 -- AUTO_INCREMENT for table `stylesheets`
 --
 ALTER TABLE `stylesheets`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `teams`
@@ -1342,19 +1095,19 @@ ALTER TABLE `teams`
 -- AUTO_INCREMENT for table `torrentlang`
 --
 ALTER TABLE `torrentlang`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `torrents`
 --
 ALTER TABLE `torrents`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `warnings`
