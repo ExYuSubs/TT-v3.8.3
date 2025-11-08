@@ -1,14 +1,4 @@
 <?php
-
-#================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
-#--------------------------------#
-#       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
-#================================#
-
 $date_time = get_date_time(gmtime()-(3600*24)); // the 24hrs is the hours you want listed
 $registered = number_format(get_row_count("users"));
 $ncomments = number_format(get_row_count("comments"));

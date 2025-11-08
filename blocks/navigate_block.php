@@ -1,14 +1,4 @@
 <?php
-
-#================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
-#--------------------------------#
-#       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
-#================================#
-
 if (!$site_config["MEMBERSONLY"] || $CURUSER) {
 begin_block(T_("NAVIGATION"));
 echo "<div id='navigate' class='bMenu'><ul>"; 

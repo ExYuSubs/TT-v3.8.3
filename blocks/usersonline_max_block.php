@@ -1,13 +1,12 @@
 <?php
-
 #================================#
-#       TorrentTrader 3.8.3      #
-#  http://torrenttrader.uk       #
+#       TorrentTrader 3.00       #
+#  http://www.torrenttrader.uk   #
 #--------------------------------#
 #       Created by M-Jay         #
-#       Modified by MicroMonkey, #
-#       Coco, Botanicar          #
+#       Modified by Botanicar    #
 #================================#
+
 
 if ($CURUSER)
 {

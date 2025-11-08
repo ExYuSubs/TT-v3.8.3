@@ -33,31 +33,7 @@ begin_block($CURUSER["username"]);
 
 	$avatar = htmlspecialchars($CURUSER["avatar"]);
 	if (!$avatar)
-	$avatar = $site_config["SITEURL"]."/images/default_avatar.png";
-
-//==| Style and Language
-
-	$ss_r = SQL_Query_exec("SELECT * from stylesheets");
-	$ss_sa = [];
-	while ($ss_a = mysqli_fetch_assoc($ss_r))
-	{
-	  $ss_id = $ss_a["id"];
-	  $ss_name = $ss_a["name"];
-	  $ss_sa[$ss_name] = $ss_id;
-	}
-	ksort($ss_sa);
-	reset($ss_sa);
-
-	$stylesheets = ""; // Initialize outside the loop
-	foreach($ss_sa as $ss_name => $ss_id)
-	{
-	  if ($ss_id == $CURUSER["stylesheet"]) $ss = " selected='selected'"; else $ss = "";
-	  $stylesheets .= "<option value='$ss_id'$ss>$ss_name</option>\n";
-	}
-
-//==| End Style and Language
-
-
+		$avatar = $site_config["SITEURL"]."/images/default_avatar.png";
 
 	$userdownloaded = mksize($CURUSER["downloaded"]);
 	$useruploaded = mksize($CURUSER["uploaded"]);
@@ -70,7 +46,7 @@ begin_block($CURUSER["username"]);
 	else
 		$userratio = "---";
 
-	print ("<center><img width='80' height='125' src='$avatar' alt='' class='avatar' /></center><br />" . T_("DOWNLOADED") . ": $userdownloaded<br />" . T_("UPLOADED") . ": $useruploaded<br />".T_("CLASS").": ".T_($CURUSER["level"])."<br />" . T_("ACCOUNT_PRIVACY_LVL") . ": $privacylevel<br />". T_("RATIO") .": $userratio");
+	print ("<center><img width='80' height='80' src='$avatar' alt='' /></center><br />" . T_("DOWNLOADED") . ": $userdownloaded<br />" . T_("UPLOADED") . ": $useruploaded<br />".T_("CLASS").": ".T_($CURUSER["level"])."<br />" . T_("ACCOUNT_PRIVACY_LVL") . ": $privacylevel<br />". T_("RATIO") .": $userratio");
 
 	$connectable = get_row_count("peers", "WHERE connectable='yes' AND userid=$CURUSER[id]");
 	$unconnectable = get_row_count("peers", "WHERE connectable='no' AND userid=$CURUSER[id]");
